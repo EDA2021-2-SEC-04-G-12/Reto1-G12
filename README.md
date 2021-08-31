@@ -1,5 +1,12 @@
 #ISIS1225 - Librerias de soporte
 
+INTEGRANTES:
+
+Requerimiento 2: Mateo Oviedo Reyes, m.oviedo@uniandes.edu.co, 202028312
+
+Requerimiento 3: Angie Catalina Campos Perilla, ac.campos@uniandes.edu.co, 202115094
+
+
 Este proyecto contiene los Tipos abstractos de datos, estructuras de datos y algoritmos requeridos por el curso ISIS1225-Estructuras de Datos y Algoritmos
 
 -Lib
