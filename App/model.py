@@ -57,7 +57,7 @@ def addVideo (catalog, video):
 
 def addArtists (catalog,artistname,video): 
     artists = catalog['artista']
-    posartist = lt.isPresent(artists, artist)
+    posartist = lt.isPresent(artists, artistname)
     if posartist > 0:
         artist = lt.getElement(artists, posartist)
     else : 
@@ -68,7 +68,7 @@ def addArtists (catalog,artistname,video):
 
 # Funciones para creacion de datos
 def newArtist(name): 
-    artist = ['nombre':'','videos': None]
+    artist = {'nombre':'','videos': None}
     artist['nombre'] = name 
     artist['videos'] = lt.newList('ARRAY_LIST')
     return artist 
