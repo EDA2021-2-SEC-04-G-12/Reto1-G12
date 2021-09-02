@@ -25,10 +25,12 @@
  """
 
 
+from sys import call_tracing
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
+
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -36,10 +38,41 @@ los mismos.
 """
 
 # Construccion de modelos
+def newCatalog() : 
+    """
+    Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
+    """
+    catalog = {'videos':None, 'categoria':None}
+    catalog['videos'] = lt.newList('ARRAY_LIST')
+    catalog['artista'] = lt.newList('ARRAY_LIST')
+    catalog['categoria'] = lt.newList('ARRAY_LIST')
+    return catalog 
 
 # Funciones para agregar informacion al catalogo
+def addVideo (catalog, video): 
+    lt.addLast(catalog['videos'],video)
+    artistas = video['artista'].split(",")
+    for artista in artistas : 
+        addArtists(catalog,artista.strip(),video)
+
+def addArtists (catalog,artistname,video): 
+    artists = catalog['artista']
+    posartist = lt.isPresent(artists, artist)
+    if posartist > 0:
+        artist = lt.getElement(artists, posartist)
+    else : 
+        artist = newArtist(artistname)
+        lt.addLast(artists, artist)
+    lt.addLast(artist['video'],video)
+
 
 # Funciones para creacion de datos
+def newArtist(name): 
+    artist = ['nombre':'','videos': None]
+    artist['nombre'] = name 
+    artist['videos'] = lt.newList('ARRAY_LIST')
+    return artist 
+
 
 # Funciones de consulta
 
