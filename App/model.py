@@ -45,17 +45,22 @@ def newCatalog() :
     catalog = {'videos':None, 'categoria':None}
     catalog['videos'] = lt.newList('ARRAY_LIST')
     catalog['artista'] = lt.newList('ARRAY_LIST')
-    catalog['categoria'] = lt.newList('ARRAY_LIST')
+    catalog['categoria'] = lt.newList('ARRAY_LIST') 
     return catalog 
 
 # Funciones para agregar informacion al catalogo
 def addVideo (catalog, video): 
+    """ #TODO:Documentacion.
+    """
     lt.addLast(catalog['videos'],video)
     artistas = video['artista'].split(",")
     for artista in artistas : 
         addArtists(catalog,artista.strip(),video)
 
 def addArtists (catalog,artistname,video): 
+    """
+    #TODO:Documentacion. 
+    """
     artists = catalog['artista']
     posartist = lt.isPresent(artists, artistname)
     if posartist > 0:
@@ -68,6 +73,9 @@ def addArtists (catalog,artistname,video):
 
 # Funciones para creacion de datos
 def newArtist(name): 
+    """
+    #TODO:Documentacion. 
+    """
     artist = {'nombre':'','videos': None}
     artist['nombre'] = name 
     artist['videos'] = lt.newList('ARRAY_LIST')
