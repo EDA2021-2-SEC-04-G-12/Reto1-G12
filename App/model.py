@@ -42,8 +42,8 @@ def newCatalog() :
     """
     Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
     """
-    catalog = {'videos':None, 'categoria':None}
-    catalog['videos'] = lt.newList('ARRAY_LIST')
+    catalog = {'artWorks':None, 'categoria':None}
+    catalog['artWorks'] = lt.newList('ARRAY_LIST')
     catalog['artista'] = lt.newList('ARRAY_LIST')
     catalog['categoria'] = lt.newList('ARRAY_LIST') 
     return catalog 
@@ -57,16 +57,15 @@ def addVideo (catalog, video):
     for artista in artistas : 
         addArtists(catalog,artista.strip(),video)
 
-def addArtists (catalog,artistname,video): 
+def addArtists (catalog,artist,video): 
     """
     #TODO:Documentacion. 
     """
     artists = catalog['artista']
-    posartist = lt.isPresent(artists, artistname)
+    posartist = lt.isPresent(artists, artist)
     if posartist > 0:
         artist = lt.getElement(artists, posartist)
     else : 
-        artist = newArtist(artistname)
         lt.addLast(artists, artist)
     lt.addLast(artist['video'],video)
 
@@ -81,9 +80,27 @@ def newArtist(name):
     artist['videos'] = lt.newList('ARRAY_LIST')
     return artist 
 
+def compareartists(artist1, artist):
+    if (artist1['ConstituendID'] == artist['ConstituendID']):
+        return 0
+    return -1
 
-# Funciones de consulta
+def compareratings(artist1, artist2):
+    return (float(artist1['BeginDate']) > float(artist2['BeginDate']))
 
-# Funciones utilizadas para comparar elementos dentro de una lista
+def sortArtist(catalog):
+    sa.sort(catalog['artist'], compareratings)
 
-# Funciones de ordenamiento
+def listCronoArtist(anioinicial,aniofinal,catalog):
+    datosartist = lt.newList("ARRAY_LIST")
+    stop = False
+    i = 1
+    while i <= lt.size(catalog["artist"]) and not stop:
+        artist = lt.getElement(catalog["artist"],i)
+        if anioinicial <= artist["BeginDate"] and artist["BeginDate"] <= aniofinal:
+            lt.addLast(datosartist,artist)
+        elif artist["BeginDate"] > aniofinal:
+            stop = True
+        i += 1
+    return datosartist
+        
