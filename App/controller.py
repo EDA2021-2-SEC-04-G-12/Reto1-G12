@@ -40,6 +40,9 @@ def loadData(catalog):
     model.sortArtist(catalog)
 
 def loadArtists(catalog): 
+    """
+    #TODO:DOCUMENTACION 
+    """
     artistsfile = cf.data_dir +'Artists-utf8-small.csv'
     input_file = csv.DictReader(open(artistsfile, encoding='utf8'))
     for artista in input_file:
