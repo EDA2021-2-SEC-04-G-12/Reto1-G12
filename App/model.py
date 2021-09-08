@@ -43,9 +43,10 @@ def newCatalog() :
     Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
     """
     catalog = {'videos':None, 'categoria':None}
-    catalog['videos'] = lt.newList('ARRAY_LIST')
-    catalog['artista'] = lt.newList('ARRAY_LIST')
-    catalog['categoria'] = lt.newList('ARRAY_LIST') 
+    catalog['Videos'] = lt.newList('ARRAY_LIST')
+    catalog['ID artista'] = lt.newList('ARRAY_LIST')
+    catalog['Artista'] = lt.newList('ARRAY_LIST')
+    catalog['Categoria'] = lt.newList('ARRAY_LIST') 
     return catalog 
 
 # Funciones para agregar informacion al catalogo
@@ -53,20 +54,20 @@ def addVideo (catalog, video):
     """ #TODO:Documentacion.
     """
     lt.addLast(catalog['videos'],video)
-    artistas = video['artista'].split(",")
+    artistas = video[''].split(",")
     for artista in artistas : 
         addArtists(catalog,artista.strip(),video)
 
-def addArtists (catalog,artistname,video): 
+def addArtists (catalog,artistas,video): 
     """
     #TODO:Documentacion. 
     """
-    artists = catalog['artista']
-    posartist = lt.isPresent(artists, artistname)
+    artists = catalog['ConstituentID']
+    posartist = lt.isPresent(artists, artistas)
     if posartist > 0:
         artist = lt.getElement(artists, posartist)
     else : 
-        artist = newArtist(artistname)
+        artist = newArtist(artistas)
         lt.addLast(artists, artist)
     lt.addLast(artist['video'],video)
 
