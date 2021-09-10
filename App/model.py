@@ -52,23 +52,25 @@ def newCatalog() :
 # Funciones para agregar informacion al catalogo
 def addVideo (catalog, video): 
     """ #TODO:Documentacion.
+    Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
     lt.addLast(catalog['videos'],video)
-    artistas = video[''].split(",")
+    artistas =  video['ConstituentID'].split(',')
     for artista in artistas : 
-        addArtists(catalog,artista.strip(),video)
+        addArtists(catalog, artista.strip(), video)
+    
 
 def addArtists (catalog,artistas,video): 
     """
     #TODO:Documentacion. 
     """
-    artists = catalog['ConstituentID']
-    posartist = lt.isPresent(artists, artistas)
+    artists = catalog['ID Artista']
+    posartist = lt.isPresent(artistas, artists)
     if posartist > 0:
         artist = lt.getElement(artists, posartist)
     else : 
         artist = newArtist(artistas)
-        lt.addLast(artists, artist)
+        lt.addLast(artist, artists)
     lt.addLast(artist['video'],video)
 
 
