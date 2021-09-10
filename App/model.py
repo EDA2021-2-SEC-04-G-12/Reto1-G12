@@ -57,7 +57,7 @@ def addVideo (catalog, video):
     lt.addLast(catalog['videos'],video)
     artistas =  video['ConstituentID'].split(',')
     for artista in artistas : 
-        addArtists(catalog, artista.strip(), video)
+        addArtists(catalog, artista.strip('[]'), video)
     
 
 def addArtists (catalog,artistas,video): 
