@@ -117,4 +117,20 @@ def cmpArtworkByDateAcquired(artwork1,artwork2):
     fechaObraA = date.date(int(artwork1["DateAcquired"].split("-")[0]),int(artwork1["DateAcquired"].split("-")[1]),int(artwork1["DateAcquired"].split("-")[2]))
     fechaObraB = date.date(int(artwork2["DateAcquired"].split("-")[0]),int(artwork2["DateAcquired"].split("-")[1]),int(artwork2["DateAcquired"].split("-")[2]))
     return (fechaObraA > fechaObraB)
+
+def sortDate(catalog):
+    sa.sort(catalog['artist'], cmpArtworkByDateAcquired)
+
+def listCronoAcquired(fechainicial,fechafinal,catalog):
+    datosart = lt.newList("ARRAY_LIST")
+    stop = False
+    i = 1
+    while i <= lt.size(catalog["Artworks"]) and not stop:
+        obra = lt.getElement(catalog["Artworks"],i)
+        if fechainicial <= fechafinal:
+            lt.addLast(datosart,obra)
+        elif artist["BeginDate"] > fechafinal:
+            stop = True
+        i += 1
+    return datosart
         
