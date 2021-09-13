@@ -108,8 +108,8 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
         i += 1
     return datosartist
 
-def compareobras(obra1,obra2):
-    fechaObraA = date.date(int(obra1["DateAcquired"].split("-")[0]),int(obra1["DateAcquired"].split("-")[1]),int(obra1["DateAcquired"].split("-")[2]))
-    fechaObraB = date.date(int(obra2["DateAcquired"].split("-")[0]),int(obra2["DateAcquired"].split("-")[1]),int(obra2["DateAcquired"].split("-")[2]))
+def cmpArtworkByDateAcquired(artwork1,artwork2):
+    fechaObraA = date.date(int(artwork1["DateAcquired"].split("-")[0]),int(artwork1["DateAcquired"].split("-")[1]),int(artwork1["DateAcquired"].split("-")[2]))
+    fechaObraB = date.date(int(artwork2["DateAcquired"].split("-")[0]),int(artwork2["DateAcquired"].split("-")[1]),int(artwork2["DateAcquired"].split("-")[2]))
     return (fechaObraA > fechaObraB)
         
