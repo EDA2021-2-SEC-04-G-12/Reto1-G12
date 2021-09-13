@@ -119,7 +119,7 @@ def cmpArtworkByDateAcquired(artwork1,artwork2):
     return (fechaObraA > fechaObraB)
 
 def sortDate(catalog):
-    sa.sort(catalog['artist'], cmpArtworkByDateAcquired)
+    sa.sort(catalog['Artworks'], cmpArtworkByDateAcquired)
 
 def listCronoAcquired(fechainicial,fechafinal,catalog):
     datosart = lt.newList("ARRAY_LIST")
@@ -133,4 +133,3 @@ def listCronoAcquired(fechainicial,fechafinal,catalog):
             stop = True
         i += 1
     return datosart
-        
