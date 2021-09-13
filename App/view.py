@@ -70,7 +70,11 @@ while True:
 
 
     elif int(inputs[0]) == 2:
-        pass
+        anioinicial = int(input("Ingrese el año inicial: "))
+        aniofinal = int(input("Ingrese el año final: "))
+        artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
+        print("Hay "+str(lt.size(catalog["artistas"])))
+        
 
     else:
         sys.exit(0)

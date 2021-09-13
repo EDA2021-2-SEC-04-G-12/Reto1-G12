@@ -22,6 +22,7 @@
 
 import config as cf
 import model
+from DISClib.Algorithms.Sorting import shellsort as sa
 import csv
 
 """
@@ -35,20 +36,8 @@ def initCatalog():
 
 # Funciones para la carga de datos
 def loadData(catalog): 
-    """
-    #TODO:DOCUMENTACION 
-    """
-    loadVideos(catalog)
     loadArtists(catalog)
-
-def loadVideos(catalog) :
-    """
-    #TODO:DOCUMENTACION 
-    """ 
-    videosfile = cf.data_dir + 'Artists-utf8-small.csv'
-    input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
-    for video in input_file : 
-        model.addVideo(catalog,video)
+    model.sortArtist(catalog)
 
 def loadArtists(catalog): 
     """
@@ -59,8 +48,5 @@ def loadArtists(catalog):
     for artista in input_file:
         model.addArtists(catalog, artista)
 
-        
-
-# Funciones de ordenamiento
-
-# Funciones de consulta sobre el catálogo
+def listCronoArtist(anioinicial,aniofinal,catalog):
+    return model.listCronoArtist(anioinicial,aniofinal,catalog)
