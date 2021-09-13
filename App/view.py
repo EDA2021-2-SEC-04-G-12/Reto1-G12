@@ -46,7 +46,6 @@ def printMenu():
 
 def initCatalog(): 
     return controller.initCatalog()
-
 def loadData(catalog) : 
     controller.loadData(catalog)
 
