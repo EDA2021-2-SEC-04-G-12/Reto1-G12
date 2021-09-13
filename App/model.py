@@ -84,6 +84,8 @@ def newArtist(name):
     artist['videos'] = lt.newList('ARRAY_LIST')
     return artist 
 
+# Funciones requerimiento 1
+
 def compareartists(artist1, artist):
     if (artist1['ConstituendID'] == artist['ConstituendID']):
         return 0
@@ -107,6 +109,9 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
             stop = True
         i += 1
     return datosartist
+
+
+# Funciones requerimiento 2
 
 def cmpArtworkByDateAcquired(artwork1,artwork2):
     fechaObraA = date.date(int(artwork1["DateAcquired"].split("-")[0]),int(artwork1["DateAcquired"].split("-")[1]),int(artwork1["DateAcquired"].split("-")[2]))
