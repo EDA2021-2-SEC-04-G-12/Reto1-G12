@@ -30,6 +30,7 @@ import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
+import datetime as date
 
 
 """
@@ -103,4 +104,9 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
             stop = True
         i += 1
     return datosartist
+
+def compareobras(obra1,obra2):
+    fechaObraA = date.date(int(obra1["DateAcquired"].split("-")[0]),int(obra1["DateAcquired"].split("-")[1]),int(obra1["DateAcquired"].split("-")[2]))
+    fechaObraB = date.date(int(obra2["DateAcquired"].split("-")[0]),int(obra2["DateAcquired"].split("-")[1]),int(obra2["DateAcquired"].split("-")[2]))
+    return (fechaObraA > fechaObraB)
         
