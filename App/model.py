@@ -40,45 +40,38 @@ los mismos.
 
 # Construccion de modelos
 def newCatalog() : 
-    """
-    Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
-    """
-    catalog = {'artWorks':None, 'categoria':None}
-    catalog['artWorks'] = lt.newList('ARRAY_LIST')
-    catalog['artista'] = lt.newList('ARRAY_LIST')
-    catalog['categoria'] = lt.newList('ARRAY_LIST') 
+    catalog = {'Artists': None,'Artistas': None, 'ArtWorks': None}
+    catalog['Artists'] = lt.newList('ARRAY_LIST')
+    catalog['ArtWorks'] = lt.newList('ARRAY_LIST')
     return catalog 
 
 # Funciones para agregar informacion al catalogo
-def addVideo (catalog, video): 
-    """ #TODO:Documentacion.
-    """
-    lt.addLast(catalog['videos'],video)
-    artistas = video['artista'].split(",")
+def addArtist(catalog, artist): 
+    lt.addLast(catalog['Artist'],artist)
+    artistas = artist['Artistas'].split(",")
     for artista in artistas : 
-        addArtists(catalog,artista.strip(),video)
+        addArtWorks(catalog,artista.strip(),artist)
 
-def addArtists (catalog,artist,video): 
-    """
-    #TODO:Documentacion. 
-    """
-    artists = catalog['artista']
-    posartist = lt.isPresent(artists, artist)
-    if posartist > 0:
-        artist = lt.getElement(artists, posartist)
-    else : 
-        lt.addLast(artists, artist)
-    lt.addLast(artist['video'],video)
+def addArtWorks(catalog,artista, artist):
+    artistas = catalog['Artistas']
+    posartista = lt.isPresent(artistas, artista)
+    if posartista > 0:
+        nombreArtist = lt.getElement(artistas, posartista)
+    else:
+        nombreArtist = newArtist(artista)
+        lt.addLast(artistas, nombreArtist)
+    lt.addLast(nombreArtist['Artist'], artist)
+
+def addArtWork(catalog, artwork):
+    lt.addLast(catalog['ArtWorks'],artwork)
+    obras = artwork['ArtWorks'].split(",") 
 
 
 # Funciones para creacion de datos
 def newArtist(name): 
-    """
-    #TODO:Documentacion. 
-    """
-    artist = {'nombre':'','videos': None}
+    artist = {'nombre':'','Artworks': None}
     artist['nombre'] = name 
-    artist['videos'] = lt.newList('ARRAY_LIST')
+    artist['Artworks'] = lt.newList('ARRAY_LIST')
     return artist 
 
 def compareartists(artist1, artist):

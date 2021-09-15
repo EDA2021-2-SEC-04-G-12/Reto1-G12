@@ -38,15 +38,19 @@ def initCatalog():
 def loadData(catalog): 
     loadArtists(catalog)
     model.sortArtist(catalog)
+    loadArtworks(catalog)
 
-def loadArtists(catalog): 
-    """
-    #TODO:DOCUMENTACION 
-    """
+def loadArtists(catalog):
     artistsfile = cf.data_dir +'Artists-utf8-small.csv'
-    input_file = csv.DictReader(open(artistsfile, encoding='utf8'))
+    input_file = csv.DictReader(open(artistsfile, encoding='utf-8'))
     for artista in input_file:
-        model.addArtists(catalog, artista)
+        model.addArtist(catalog, artista)
+
+def loadArtworks(catalog):
+    artworksfile = cf.data_dir + 'Artworks-utf8-small.csv'
+    input_file = csv.DictReader(open(artworksfile, encoding='utf-8'))
+    for artwork in input_file:
+        model.addArtWork(catalog, artwork)
 
 def listCronoArtist(anioinicial,aniofinal,catalog):
     return model.listCronoArtist(anioinicial,aniofinal,catalog)
