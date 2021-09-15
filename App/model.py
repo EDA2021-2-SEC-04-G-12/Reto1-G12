@@ -31,6 +31,7 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
 import datetime as date
+from DISClib.Utils import error as error
 
 
 """
@@ -127,9 +128,9 @@ def listCronoAcquired(fechainicial,fechafinal,catalog):
     i = 1
     while i <= lt.size(catalog["Artworks"]) and not stop:
         obra = lt.getElement(catalog["Artworks"],i)
-        if fechainicial <= fechafinal:
+        if fechainicial <= obra["DateAcquired"] and obra["DateAcquired"] <= fechafinal:
             lt.addLast(datosart,obra)
-        elif artist["BeginDate"] > fechafinal:
+        elif obra["DateAcquired"] > fechafinal:
             stop = True
         i += 1
     return datosart
