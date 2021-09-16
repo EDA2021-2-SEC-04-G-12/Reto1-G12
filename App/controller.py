@@ -48,5 +48,12 @@ def loadArtists(catalog):
     for artista in input_file:
         model.addArtists(catalog, artista)
 
+# Funciones de ordenamiento
+
+def sortArtist(catalog, size):
+    return model.sortArtists(catalog, size)
+
+
+
 def listCronoArtist(anioinicial,aniofinal,catalog):
     return model.listCronoArtist(anioinicial,aniofinal,catalog)
