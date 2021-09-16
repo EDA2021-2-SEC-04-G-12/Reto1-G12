@@ -36,7 +36,7 @@ def initCatalog(listType):
         TADlist = 'ARRAY_LIST'
     elif listType == 2: 
         TADlist = 'SINGLE_LINKED'
-    catalog = model.newCatalog(TADlist) 
+    catalog = model.newCatalog(listType) 
     return catalog 
 
 # Funciones para la carga de datos
