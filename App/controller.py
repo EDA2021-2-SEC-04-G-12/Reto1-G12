@@ -35,12 +35,12 @@ def initCatalog():
 
 # Funciones para la carga de datos
 def loadData(catalog): 
-    loadVideos(catalog)
+    loadartWork(catalog)
     loadArtists(catalog)
 
-def loadVideos(catalog): 
-    videosfile = cf.data_dir + 'Artworks-utf8-small.csv'
-    input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
+def loadartWork(catalog): 
+    artWorkfile = cf.data_dir + 'Artworks-utf8-small.csv'
+    input_file = csv.DictReader(open(artWorkfile, encoding='utf-8'))
     for video in input_file :
         model.addVideo(catalog,video)
 

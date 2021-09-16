@@ -43,8 +43,8 @@ def newCatalog() :
     """
     Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
     """
-    catalog = {'videos':None, 'categoria':None, 'ID artista':None, 'artista': None, 'categoria':None}
-    catalog['videos'] = lt.newList('ARRAY_LIST')
+    catalog = {'artWork':None, 'categoria':None, 'ID artista':None, 'artista': None, 'categoria':None}
+    catalog['artWork'] = lt.newList('ARRAY_LIST')
     catalog['ID artista'] = lt.newList('ARRAY_LIST')
     catalog['artista'] = lt.newList('ARRAY_LIST')
     catalog['artista_2'] = lt.newList('ARRAY_LIST')
@@ -52,18 +52,17 @@ def newCatalog() :
     return catalog 
 
 # Funciones para agregar informacion al catalogo
-def addVideo (catalog, video): 
+def addartWork (catalog, artWork): 
     """ #TODO:Documentacion.
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
-    print(catalog['videos'])
-    lt.addLast(catalog['videos'],video)
-    artistas =  video['ConstituentID'].split(',')
+    lt.addLast(catalog['artWork'],artWork)
+    artistas =  artWork['ConstituentID'].split(',')
     for artista in artistas : 
-        addArtists(catalog, artista.strip('[]'), video)
+        addArtists(catalog, artista.strip('[]'),artWork)
     
 
-def addArtists (catalog,artista,video): 
+def addArtists (catalog,artista,artWork): 
     """
     . 
     """
@@ -74,7 +73,7 @@ def addArtists (catalog,artista,video):
     else : 
         artist = newArtist(artista)
         lt.addLast(artists, artista)
-    lt.addLast(artist['videos'],video)
+    lt.addLast(artist['artWork'],artWork)
 
 def addArtists_2 (catalog, artist): 
     """
@@ -91,9 +90,9 @@ def newArtist(ID):
     """
     #TODO:Documentacion. 
     """
-    artist = {'nombre':None ,'videos': None}
+    artist = {'nombre':None ,'artWork': None}
     artist['nombre'] = ID 
-    artist['videos'] = lt.newList('ARRAY_LIST')
+    artist['artWork'] = lt.newList('ARRAY_LIST')
     return artist 
 
 def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan): 
