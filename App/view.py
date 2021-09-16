@@ -47,7 +47,7 @@ def printMenu():
 def initCatalog(listType): 
     return controller.initCatalog(listType)
 def loadData(catalog, listType) : 
-    controller.loadData(catalog,listType)
+    controller.loadData(catalog)
 
 def printSortResults(ord_artist, sample=10):
     size = lt.size(ord_artist)
@@ -88,7 +88,8 @@ while True:
     elif int(inputs[0]) == 2:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
-        artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
+        algoSort = int(input('Elija el tipo de algoritmo de ordenamiento (1.Insertion,2.Shell,3.Merge,4.Quick Sort'))
+        artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog,algoSort)
         print("Hay "+str(lt.size(catalog["artistas"])))
 
     elif int(inputs[0]) == 3:

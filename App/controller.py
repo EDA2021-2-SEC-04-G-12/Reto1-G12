@@ -67,4 +67,5 @@ def sortArtists(catalog, size, orden):
 
 
 def listCronoArtist(anioinicial,aniofinal,catalog):
+
     return model.listCronoArtist(anioinicial,aniofinal,catalog)
