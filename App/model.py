@@ -42,6 +42,7 @@ los mismos.
 def newCatalog() : 
     catalog = {'Artists': None,'Artistas': None, 'ArtWorks': None}
     catalog['Artists'] = lt.newList('ARRAY_LIST')
+    catalog['Artistas'] = lt.newList('ARRAY_LIST')
     catalog['ArtWorks'] = lt.newList('ARRAY_LIST')
     return catalog 
 
