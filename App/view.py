@@ -45,10 +45,10 @@ def printMenu():
     print("6- Transportar obras de un departamento")
     print("7- Proponer una nueva exposición en el museo")
 
-def initCatalog(): 
-    return controller.initCatalog()
-def loadData(catalog) : 
-    controller.loadData(catalog)
+def initCatalog(listType): 
+    return controller.initCatalog(listType)
+def loadData(catalog, listType) : 
+    controller.loadData(catalog,listType)
 
 def printSortResults(ord_artist, sample=10):
     size = lt.size(ord_artist)
@@ -73,8 +73,9 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        listType = int(input("Elija un tipo de lista para cargar los datos (1.ARRAY_LIST o 2.SINGLE_LINKED):"))
         print("Cargando información de los archivos ....")
-        catalog = initCatalog() 
+        catalog = initCatalog(listType) 
         loadData(catalog)
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
         print('Artistas cargados: ' + str(lt.size(catalog['artista'])))\

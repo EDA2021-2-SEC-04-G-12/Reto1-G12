@@ -20,6 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+from time import thread_time
 import config as cf
 import model
 from DISClib.Algorithms.Sorting import shellsort as sa
@@ -30,8 +31,12 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 # Inicialización del Catálogo de libros
-def initCatalog(): 
-    catalog = model.newCatalog() 
+def initCatalog(listType): 
+    if listType == 1: 
+        TADlist = 'ARRAY_LIST'
+    elif listType == 2: 
+        TADlist = 'SINGLE_LINKED'
+    catalog = model.newCatalog(TADlist) 
     return catalog 
 
 # Funciones para la carga de datos

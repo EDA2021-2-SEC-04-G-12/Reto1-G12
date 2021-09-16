@@ -45,15 +45,14 @@ los mismos.
 """
 
 # Construccion de modelos
-def newCatalog() : 
+def newCatalog(listType) : 
     """
     Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
     """
-    catalog = {'artWork':None, 'categoria':None, 'ID artista':None, 'artista': None, 'categoria':None}
-    catalog['artWork'] = lt.newList('ARRAY_LIST')
-    catalog['ID artista'] = lt.newList('ARRAY_LIST')
-    catalog['artista'] = lt.newList('ARRAY_LIST')
-    catalog['categoria'] = lt.newList('ARRAY_LIST') 
+    catalog = {'artWork':None, 'categoria':None}
+    catalog['artWork'] = lt.newList(listType)
+    catalog['artista'] = lt.newList(listType)
+    catalog['categoria'] = lt.newList(listType) 
     return catalog 
 
 # Funciones para agregar informacion al catalogo
@@ -110,8 +109,8 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
     stop = False
     i = 1
-    while i <= lt.size(catalog["artist"]) and not stop:
-        artist = lt.getElement(catalog["artist"],i)
+    while i <= lt.size(catalog["artista"]) and not stop:
+        artist = lt.getElement(catalog["artista"],i)
         if anioinicial <= artist["BeginDate"] and artist["BeginDate"] <= aniofinal:
             lt.addLast(datosartist,artist)
         elif artist["BeginDate"] > aniofinal:
