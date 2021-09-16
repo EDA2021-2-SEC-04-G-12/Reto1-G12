@@ -58,7 +58,10 @@ def printSortResults(ord_artist, sample=10):
         i=1
         while i <= sample:
             book = lt.getElement(ord_artist,i)
-            print("Titulo: "+book["title"]+" ISBN: "+book["isbn"]+" Rating: "+book["average_rating"])
+            print("Object ID: "+artistas["ObjectID"]+" Título: "+artistas["Title"]
+            +" Nombre del artista: "+artistas["ArtistsNames"]+" Medio: "+artistas["Medium"]
+            +" Dimensiones: "+artistas["Dimensions"]+" Fecha: "+artistas["Date"]
+            +" Fecha adquisición: "+artistas["DateAcquired"]+" URL: "+artistas["URL"])
             i+=1
 
 
