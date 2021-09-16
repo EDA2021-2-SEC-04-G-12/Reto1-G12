@@ -46,7 +46,7 @@ def printMenu():
 
 def initCatalog(listType): 
     return controller.initCatalog(listType)
-def loadData(catalog, listType) : 
+def loadData(catalog) : 
     controller.loadData(catalog)
 
 def printSortResults(ord_artist, sample=10):
