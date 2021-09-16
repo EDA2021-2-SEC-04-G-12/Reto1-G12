@@ -51,7 +51,7 @@ def newCatalog(listType) :
     """
     catalog = {'artWork':None, 'categoria':None}
     catalog['artWork'] = lt.newList(listType)
-    catalog['artista'] = lt.newList(listType)
+    catalog['artista'] = lt.newList(listType,compareartists)
     catalog['categoria'] = lt.newList(listType) 
     return catalog 
 
@@ -103,7 +103,7 @@ def compareratings(artist1, artist2):
     return (float(artist1['BeginDate']) > float(artist2['BeginDate']))
 
 def sortArtist(catalog):
-    sa.sort(catalog['artist'], compareratings)
+    sa.sort(catalog['artist'])
 
 def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
