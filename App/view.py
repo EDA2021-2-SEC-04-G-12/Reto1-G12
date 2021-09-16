@@ -79,7 +79,7 @@ while True:
         elif listType == 2:
             listType = "SINGLE_LINKED"
         catalog = controller.initCatalog(listType) 
-        loadData(catalog)
+        controller.loadData(catalog)
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
         print('Artistas cargados: ' + str(lt.size(catalog['artista'])))\
 
