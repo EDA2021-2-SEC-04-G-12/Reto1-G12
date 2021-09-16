@@ -90,7 +90,8 @@ while True:
 
     elif int(inputs[0]) == 5:
         size = input("Indique tamaño de la muestra: ")
-        result = controller.sortArtists(catalog, int(size))
+        orden = input("Indique un número para seleccionar un orden específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n")
+        result = controller.sortArtists(catalog, int(size),int(orden))
         print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
         printSortResults(result[1])
