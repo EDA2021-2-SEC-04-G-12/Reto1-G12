@@ -32,6 +32,7 @@ from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
 import datetime as date
 from DISClib.Utils import error as error
+import time
 
 
 """
@@ -134,6 +135,16 @@ def listCronoAcquired(fechainicial,fechafinal,catalog):
             stop = True
         i += 1
     return datosart
+
+def sortArtists(catalog, size):
+    # TODO completar modificaciones para el laboratorio 4
+    sub_list = lt.subList(catalog['books'], 1, size)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    sorted_list = sa.sort(sub_list, compareratings)
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
 
 # Función Sublist()
 

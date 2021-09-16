@@ -50,7 +50,7 @@ def loadArtists(catalog):
 
 # Funciones de ordenamiento
 
-def sortArtist(catalog, size):
+def sortArtists(catalog, size):
     return model.sortArtists(catalog, size)
 
 
