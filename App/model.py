@@ -137,8 +137,7 @@ def listCronoAcquired(fechainicial,fechafinal,catalog):
     return datosart
 
 def sortArtists(catalog, size):
-    # TODO completar modificaciones para el laboratorio 4
-    sub_list = lt.subList(catalog['books'], 1, size)
+    sub_list = lt.subList(catalog['artworks'], 1, size)
     sub_list = sub_list.copy()
     start_time = time.process_time()
     sorted_list = sa.sort(sub_list, compareratings)
