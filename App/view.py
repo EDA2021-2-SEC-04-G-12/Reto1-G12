@@ -63,7 +63,7 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog() 
         loadData(catalog)
-        print('Videoss cargados:  ' + str(lt.size(catalog['video'])))
+        print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
         print('Artistas cargados: ' + str(lt.size(catalog['artista'])))\
 
 

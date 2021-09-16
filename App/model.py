@@ -47,34 +47,17 @@ def newCatalog() :
     catalog['artWork'] = lt.newList('ARRAY_LIST')
     catalog['ID artista'] = lt.newList('ARRAY_LIST')
     catalog['artista'] = lt.newList('ARRAY_LIST')
-    catalog['artista_2'] = lt.newList('ARRAY_LIST')
     catalog['categoria'] = lt.newList('ARRAY_LIST') 
     return catalog 
 
 # Funciones para agregar informacion al catalogo
+
 def addartWork (catalog, artWork): 
     """ #TODO:Documentacion.
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
     lt.addLast(catalog['artWork'],artWork)
-    artistas =  artWork['ConstituentID'].split(',')
-    for artista in artistas : 
-        addArtists(catalog, artista.strip('[]'),artWork)
     
-
-def addArtists (catalog,artista,artWork): 
-    """
-    . 
-    """
-    artists = catalog['ID artista']
-    posartist = lt.isPresent(artists, artista)
-    if posartist > 0:
-        artist = lt.getElement(artists, posartist)
-    else : 
-        artist = newArtist(artista)
-        lt.addLast(artists, artista)
-    lt.addLast(artist['artWork'],artWork)
-
 def addArtists_2 (catalog, artist): 
     """
     Adiciona un artista a la lista de artistas. 
@@ -82,18 +65,10 @@ def addArtists_2 (catalog, artist):
     a = newArtist_2(artist['DisplayName'],artist['ConstituentID'],artist['ArtistBio'],\
         artist['Nationality'],artist['Gender'],artist['BeginDate'],artist['EndDate'],\
             artist['Wiki QID'],artist['ULAN']) 
-    lt.addLast(catalog['artista_2'],a)
+    lt.addLast(catalog['artista'],a)
 
 
 # Funciones para creacion de datos
-def newArtist(ID): 
-    """
-    #TODO:Documentacion. 
-    """
-    artist = {'nombre':None ,'artWork': None}
-    artist['nombre'] = ID 
-    artist['artWork'] = lt.newList('ARRAY_LIST')
-    return artist 
 
 def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan): 
     """
