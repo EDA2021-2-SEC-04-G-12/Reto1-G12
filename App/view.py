@@ -39,6 +39,7 @@ def printMenu():
     print("1- Cargar información en el catálogo")
     print("2- Listar cronológicamente los artistas")
     print("3- Listar cronológicamente las adquisiciones")
+    print("5- Ordenar")
     print("4- Clasificar las obras de un artista por técnica")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
     print("6- Transportar obras de un departamento")
@@ -50,6 +51,15 @@ def initCatalog():
 def loadData(catalog) : 
     controller.loadData(catalog)
 
+def printSortResults(ord_artist, sample=10):
+    size = lt.size(ord_artist)
+    if size > sample:
+        print("Los primeros ", sample, "libros ordenados son: ")
+        i=1
+        while i <= sample:
+            book = lt.getElement(ord_artist,i)
+            print("Titulo: "+book["title"]+" ISBN: "+book["isbn"]+" Rating: "+book["average_rating"])
+            i+=1
 
 
 catalog = None
@@ -74,6 +84,13 @@ while True:
         aniofinal = int(input("Ingrese el año final: "))
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
         print("Hay "+str(lt.size(catalog["artistas"])))
+
+    elif int(inputs[0]) == 5:
+        size = input("Indique tamaño de la muestra: ")
+        result = controller.sortArtists(catalog, int(size))
+        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                                          str(result[0]))
+        printSortResults(result[1])
         
 
     else:
