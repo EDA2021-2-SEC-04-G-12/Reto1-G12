@@ -29,6 +29,9 @@ from sys import call_tracing
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as ins
+from DISClib.Algorithms.Sorting import mergesort as mer
+from DISClib.Algorithms.Sorting import quicksort as quic
 assert cf
 import datetime as date
 from DISClib.Utils import error as error
@@ -120,8 +123,17 @@ def cmpArtworkByDateAcquired(artwork1,artwork2):
     fechaObraB = date.date(int(artwork2["DateAcquired"].split("-")[0]),int(artwork2["DateAcquired"].split("-")[1]),int(artwork2["DateAcquired"].split("-")[2]))
     return (fechaObraA < fechaObraB)
 
-def sortDate(catalog):
+def sortDateInsertion(catalog):
+    ins.sort(catalog['Artworks'], cmpArtworkByDateAcquired)
+
+def sortDateShell(catalog):
     sa.sort(catalog['Artworks'], cmpArtworkByDateAcquired)
+
+def sortDateMerge(catalog):
+    mer.sort(catalog['Artworks'], cmpArtworkByDateAcquired) 
+
+def sortDateQuick(catalog):
+    quic.sort(catalog['Artworks'], cmpArtworkByDateAcquired)
 
 def listCronoAcquired(fechainicial,fechafinal,catalog):
     datosart = lt.newList("ARRAY_LIST")
