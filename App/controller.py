@@ -36,17 +36,23 @@ def initCatalog():
 
 # Funciones para la carga de datos
 def loadData(catalog): 
+    loadartWork(catalog)
     loadArtists(catalog)
-    model.sortArtist(catalog)
+
+def loadartWork(catalog): 
+    artWorkfile = cf.data_dir + 'Artworks-utf8-small.csv'
+    input_file = csv.DictReader(open(artWorkfile, encoding='utf-8'))
+    for video in input_file :
+        model.addartWork(catalog,video)
 
 def loadArtists(catalog): 
     """
     #TODO:DOCUMENTACION 
     """
     artistsfile = cf.data_dir +'Artists-utf8-small.csv'
-    input_file = csv.DictReader(open(artistsfile, encoding='utf8'))
+    input_file = csv.DictReader(open(artistsfile, encoding='utf-8'))
     for artista in input_file:
-        model.addArtists(catalog, artista)
+        model.addArtists_2(catalog, artista)
 
 # Funciones de ordenamiento
 
