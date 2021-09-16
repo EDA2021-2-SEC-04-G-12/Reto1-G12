@@ -39,16 +39,16 @@ def loadData(catalog):
     loadArtists(catalog)
 
 def loadVideos(catalog): 
-    videosfile = cf.data_dir + 'Artists-utf8-small.csv'
+    videosfile = cf.data_dir + 'Artworks-utf8-small.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
-    for video in input_file : 
+    for video in input_file :
         model.addVideo(catalog,video)
 
 def loadArtists(catalog): 
     artistsfile = cf.data_dir +'Artists-utf8-small.csv'
     input_file = csv.DictReader(open(artistsfile, encoding='utf8'))
     for artista in input_file:
-        model.addArtists(catalog, artista)
+        model.addArtists_2(catalog, artista)
 
         
 

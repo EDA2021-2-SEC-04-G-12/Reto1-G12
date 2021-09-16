@@ -25,6 +25,7 @@
  """
 
 
+from csv import DictReader
 from sys import call_tracing
 import config as cf
 from DISClib.ADT import list as lt
@@ -42,11 +43,12 @@ def newCatalog() :
     """
     Inicializa el catálogo de los videos. Crea una lista para los videos y otra para las categorias. 
     """
-    catalog = {'videos':None, 'categoria':None}
+    catalog = {'videos':None, 'categoria':None, 'ID artista':None, 'artista': None, 'categoria':None}
     catalog['videos'] = lt.newList('ARRAY_LIST')
     catalog['ID artista'] = lt.newList('ARRAY_LIST')
-    catalog['Artista'] = lt.newList('ARRAY_LIST')
-    catalog['Categoria'] = lt.newList('ARRAY_LIST') 
+    catalog['artista'] = lt.newList('ARRAY_LIST')
+    catalog['artista_2'] = lt.newList('ARRAY_LIST')
+    catalog['categoria'] = lt.newList('ARRAY_LIST') 
     return catalog 
 
 # Funciones para agregar informacion al catalogo
@@ -54,36 +56,62 @@ def addVideo (catalog, video):
     """ #TODO:Documentacion.
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
-    print("ADDVIDEO")
+    print(catalog['videos'])
     lt.addLast(catalog['videos'],video)
     artistas =  video['ConstituentID'].split(',')
     for artista in artistas : 
         addArtists(catalog, artista.strip('[]'), video)
     
 
-def addArtists (catalog,artistas,video): 
+def addArtists (catalog,artista,video): 
     """
-    #TODO:Documentacion. 
+    . 
     """
     artists = catalog['ID artista']
-    posartist = lt.isPresent(artistas, artists)
+    posartist = lt.isPresent(artists, artista)
     if posartist > 0:
         artist = lt.getElement(artists, posartist)
     else : 
-        artist = newArtist(artistas)
-        lt.addLast(artist, artists)
-    lt.addLast(artist['video'],video)
+        artist = newArtist(artista)
+        lt.addLast(artists, artista)
+    lt.addLast(artist['videos'],video)
+
+def addArtists_2 (catalog, artist): 
+    """
+    Adiciona un artista a la lista de artistas. 
+    """
+    a = newArtist_2(artist['DisplayName'],artist['ConstituentID'],artist['ArtistBio'],\
+        artist['Nationality'],artist['Gender'],artist['BeginDate'],artist['EndDate'],\
+            artist['Wiki QID'],artist['ULAN']) 
+    lt.addLast(catalog['artista_2'],a)
 
 
 # Funciones para creacion de datos
-def newArtist(name): 
+def newArtist(ID): 
     """
     #TODO:Documentacion. 
     """
-    artist = {'nombre':'','videos': None}
-    artist['nombre'] = name 
+    artist = {'nombre':None ,'videos': None}
+    artist['nombre'] = ID 
     artist['videos'] = lt.newList('ARRAY_LIST')
     return artist 
+
+def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan): 
+    """
+    Esrta estructura almacena los datos de los artistas. 
+    """
+    artista = {'DisplayName': '', 'ConstituentID':''}
+    artista['DisplayName'] = DisplayName 
+    artista['ConstituentID'] = id 
+    artista['ArtistBio'] = bio 
+    artista['Nationality'] = nationality
+    artista['Gender'] = gender
+    artista['BeginDate'] = begin
+    artista['EndDate'] = end
+    artista['Wiki QID'] = wiki 
+    artista['ULAN'] = ulan 
+    return artista
+
 
 
 # Funciones de consulta
