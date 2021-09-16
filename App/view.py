@@ -38,8 +38,7 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Listar cronológicamente los artistas")
-    print("3- Listar cronológicamente las adquisiciones")
-    print("5- Ordenar")
+    print("3- Ordenar cronológicamente las adquisiciones")
     print("4- Clasificar las obras de un artista por técnica")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
     print("6- Transportar obras de un departamento")
@@ -88,7 +87,7 @@ while True:
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
         print("Hay "+str(lt.size(catalog["artistas"])))
 
-    elif int(inputs[0]) == 5:
+    elif int(inputs[0]) == 3:
         size = input("Indique tamaño de la muestra: ")
         orden = input("Indique un número para seleccionar un orden específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n")
         result = controller.sortArtists(catalog, int(size),int(orden))
