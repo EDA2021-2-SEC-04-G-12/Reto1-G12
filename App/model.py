@@ -47,7 +47,7 @@ def newCatalog() :
 
 # Funciones para agregar informacion al catalogo
 def addArtist(catalog, artist): 
-    lt.addLast(catalog['Artist'],artist)
+    lt.addLast(catalog['Artists'],artist)
     artistas = artist['Artistas'].split(",")
     for artista in artistas : 
         addArtWorks(catalog,artista.strip(),artist)
