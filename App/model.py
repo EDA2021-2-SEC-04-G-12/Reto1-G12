@@ -148,11 +148,18 @@ def listCronoAcquired(fechainicial,fechafinal,catalog):
         i += 1
     return datosart
 
-def sortArtists(catalog, size):
+def sortArtists(catalog, size, orden):
     sub_list = lt.subList(catalog['artworks'], 1, size)
     sub_list = sub_list.copy()
     start_time = time.process_time()
-    sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
+    if orden == 1:
+        sorted_list = ins.sort(sub_list, cmpArtworkByDateAcquired)
+    elif orden == 2:
+        sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
+    elif orden == 3:
+        sorted_list = mer.sort(sub_list, cmpArtworkByDateAcquired)
+    elif orden == 4:
+        sorted_list = quic.sort(sub_list, cmpArtworkByDateAcquired)
     return elapsed_time_mseg, sorted_list
