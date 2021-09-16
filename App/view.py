@@ -74,6 +74,10 @@ while True:
     if int(inputs[0]) == 1:
         listType = int(input("Elija un tipo de lista para cargar los datos (1.ARRAY_LIST o 2.SINGLE_LINKED):"))
         print("Cargando información de los archivos ....")
+        if listType == 1:
+            listType = "ARRAY_LIST"
+        elif listType == 2:
+            listType = "SINGLE_LINKED"
         catalog = initCatalog(listType) 
         loadData(catalog)
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
