@@ -78,7 +78,7 @@ while True:
             listType = "ARRAY_LIST"
         elif listType == 2:
             listType = "SINGLE_LINKED"
-        catalog = initCatalog(listType) 
+        catalog = controller.initCatalog(listType) 
         loadData(catalog)
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
         print('Artistas cargados: ' + str(lt.size(catalog['artista'])))\
