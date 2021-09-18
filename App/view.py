@@ -62,6 +62,14 @@ def printSortResults(ord_artist, sample=10):
             +" Fecha adquisición: "+artistas["DateAcquired"]+" URL: "+artistas["URL"])
             i+=1
 
+def printArtistData(artist):
+    if artist:
+        print(artist['name']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(artist['artWork'])+' pieces in his/her name at the museum.'))
+        for artist in lt.iterator(artist['artWork']):
+            print('ObjectID: '+artist['ObjectID']+' Titulo: ' + artist['Title'] + '  Medio: ' + artist['Medium']+ '  Fecha: ' + artist['Date']+ '  Dimensiones: ' + artist['Dimensions']+ '  Fecha Adquisición: ' + artist['DateAcquired']+ '  Departamento: ' + artist['Department']+ '  Clasificación: ' + artist['Classification']+ '  URL: ' + artist['URL'])
+    else:
+        print('No se encontro el artista')
+
 
 catalog = None
 
@@ -92,6 +100,8 @@ while True:
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog,algoSort)
         print("Hay "+str(lt.size(catalog["artistas"])))
 
+
+
     elif int(inputs[0]) == 3:
         size = input("Indique tamaño de la muestra: ")
         orden = input("Indique un número para seleccionar un orden específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n")
@@ -99,6 +109,13 @@ while True:
         print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
         printSortResults(result[1])
+
+
+
+    elif int(inputs[0]) == 4:
+        artistname = input("Nombre del artista a buscar: ")
+        artist = controller.getArtworksArtist(artistname, catalog)
+        printArtistData(artist)
         
 
     else:

@@ -69,3 +69,13 @@ def sortArtists(catalog, size, orden):
 def listCronoArtist(anioinicial,aniofinal,catalog):
 
     return model.listCronoArtist(anioinicial,aniofinal,catalog)
+
+# Funciones de consulta sobre el catálogo
+
+def getArtworksArtist(artist_name, catalog):
+    artist = model.getArtworksArtist(artist_name, catalog)
+    return artist
+
+
+def countArtworks(artwork, catalog):
+    return model.countArtworks(artwork, catalog)
