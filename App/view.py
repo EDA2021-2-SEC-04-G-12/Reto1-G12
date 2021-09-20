@@ -74,10 +74,6 @@ while True:
     if int(inputs[0]) == 1:
         listType = int(input("Elija un tipo de lista para cargar los datos (1.ARRAY_LIST o 2.SINGLE_LINKED):"))
         print("Cargando información de los archivos ....")
-        if listType == 1:
-            listType = "ARRAY_LIST"
-        elif listType == 2:
-            listType = "SINGLE_LINKED"
         catalog = initCatalog(listType) 
         loadData(catalog)
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
@@ -88,13 +84,12 @@ while True:
     elif int(inputs[0]) == 2:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
-        algoSort = int(input('Elija el tipo de algoritmo de ordenamiento (1.Insertion,2.Shell,3.Merge,4.Quick Sort'))
-        artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog,algoSort)
+        artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
         print("Hay "+str(lt.size(catalog["artistas"])))
 
     elif int(inputs[0]) == 3:
         size = input("Indique tamaño de la muestra: ")
-        orden = input("Indique un número para seleccionar un orden específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n")
+        orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
         result = controller.sortArtists(catalog, int(size),int(orden))
         print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
