@@ -93,7 +93,9 @@ while True:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
-        print("Hay "+str(lt.size(catalog["artistas"])))
+        print("Hay "+str(lt.size(artistas)) + " artistas nacidos entre "+ str(anioinicial) + " y " + str(aniofinal))
+        print("-"*50)
+     
 
 
 

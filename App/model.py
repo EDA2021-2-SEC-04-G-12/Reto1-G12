@@ -104,19 +104,19 @@ def compareratings(artist1, artist2):
 
 def sortArtist(catalog):
     sa.sort(catalog['artist'])
-
 def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
     stop = False
     i = 1
     while i <= lt.size(catalog["artista"]) and not stop:
         artist = lt.getElement(catalog["artista"],i)
-        if anioinicial <= artist["BeginDate"] and artist["BeginDate"] <= aniofinal:
+        if anioinicial >= int(artist["BeginDate"]) and int(artist["BeginDate"]) <= aniofinal:
             lt.addLast(datosartist,artist)
-        elif artist["BeginDate"] > aniofinal:
+        elif int(artist["BeginDate"]) > aniofinal:
             stop = True
         i += 1
     return datosartist
+
 
 
 # Funciones requerimiento 2
