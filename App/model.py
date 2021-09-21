@@ -40,8 +40,8 @@ import time
 
 
 """
-Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
-los mismos.
+Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las 
+categorias de los mismos.
 """
 
 # Construccion de modelos
@@ -61,7 +61,11 @@ def addartWork (catalog, artWork):
     """ #TODO:Documentacion.
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
-    lt.addLast(catalog['artWork'],artWork)
+    art = newartWork(artWork['ConstituentID'],artWork['Date'],artWork['Medium'],artWork['Dimensions'],artWork['CreditLine'],\
+        artWork['AccessionNumber'],artWork['Classification'],artWork['Department'],artWork['DateAcquired'],artWork['Cataloged'],\
+            artWork['ObjectID'],artWork['URL'],artWork['Circumference (cm)'],artWork['Depth (cm)'],artWork['Diameter (cm)'],artWork['Height (cm)'],\
+                artWork['Length (cm)'],artWork['Weight (kg)'],artWork['Width (cm)'],artWork['Seat Height (cm)'],artWork['Duration (sec.)'])
+    lt.addLast(catalog['artWork'],art)
     
 def addArtists_2 (catalog, artist): 
     """
@@ -74,14 +78,43 @@ def addArtists_2 (catalog, artist):
 
 
 # Funciones para creacion de datos
+def newartWork (ConstituentID,date,medium,dimensions,creditLine,accessionNumber,clasification,department,\
+    dateAquired,Cataloged,objectId,URL,circumference,depth,diameter,height,length,weight,width,seatHeight,duration): 
+    ArtWork = {'ConstituentID':'','Date':'','Medium':'','Dimensions':'','CreditLine':'','AccessionNumber':'',\
+        'Classification':'','Department':'','DateAcquired':'','Cataloged':'','ObjectID':'','URL':'','Circumference':'',\
+            'Depth':'','Diameter':'','Height':'','Length':'','Weight':'','Width':'','Seat Height':'','Duration':''}
+    ArtWork['ConstituentID'] = ConstituentID
+    ArtWork['Date'] = date
+    ArtWork['Medium'] = medium
+    ArtWork['Dimensions'] = dimensions
+    ArtWork['CreditLine'] = creditLine
+    ArtWork['AccessionNumber'] = accessionNumber
+    ArtWork['Classification'] = clasification
+    ArtWork['Department'] = department 
+    ArtWork['DateAcquired'] = dateAquired
+    ArtWork['Cataloged'] = Cataloged
+    ArtWork['ObjectID'] = objectId
+    ArtWork['URL'] = URL
+    ArtWork['Circumference'] =circumference
+    ArtWork['Depth'] = depth
+    ArtWork['Diameter'] = diameter
+    ArtWork['Height'] = height
+    ArtWork['Length'] = length
+    ArtWork['Weight'] = weight
+    ArtWork['Width'] = width
+    ArtWork['Seat Height'] = seatHeight
+    ArtWork['Duration'] = duration
+    return ArtWork
+
 
 def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan): 
     """
     Esrta estructura almacena los datos de los artistas. 
     """
-    artista = {'DisplayName': '', 'ConstituentID':''}
+    artista = {'DisplayName': '', 'ConstituentID':'','ArtistBio':'','Nationality':'','Gender':'','BeginDate':'',\
+        'EndDate':'','Wiki QID':'','ULAN':''}
     artista['DisplayName'] = DisplayName 
-    artista['ConstituentID'] = id 
+    artista['ConstituentID'] = id  
     artista['ArtistBio'] = bio 
     artista['Nationality'] = nationality
     artista['Gender'] = gender
