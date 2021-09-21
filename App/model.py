@@ -62,9 +62,6 @@ def addartWork (catalog, artWork):
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
     lt.addLast(catalog['artWork'],artWork)
-    artistas = catalog["artista"].split(",")
-    for artista in artistas:
-        addArtists_2(catalog, artista.strip())
     
 def addArtists_2 (catalog, artist): 
     """
