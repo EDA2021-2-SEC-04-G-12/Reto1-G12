@@ -181,13 +181,12 @@ def getArtworksArtist(artist, catalog):
         return artist
     return None
 
-
 def countArtworks(artwork, catalog):
     artworks = catalog['artWork']
     artworkcount = 0
     pos = lt.isPresent(artworks, artwork)
     if pos > 0:
-        artwork_element = lt.getElement(artworks, artwork)
+        artwork_element = lt.getElement(artworks, pos)
         if artwork_element is not None:
             for artwork_artist in lt.iterator(catalog['artWork']):
                 if artwork_element['ConstituentID'] == artwork_artist['ConstituentID']:
