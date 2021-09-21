@@ -62,6 +62,9 @@ def addartWork (catalog, artWork):
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
     lt.addLast(catalog['artWork'],artWork)
+    artistas = catalog["artista"].split(",")
+    for artista in artistas:
+        addArtists_2(catalog, artista.strip())
     
 def addArtists_2 (catalog, artist): 
     """
@@ -94,8 +97,8 @@ def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan):
 
 # Funciones requerimiento 1
 
-def compareartists(artist1, artist):
-    if (artist1.lower() in artist['name'].lower()):
+def compareartists(artist1, artista):
+    if (artist1.lower() in artista['DisplayName'].lower()):
         return 0
     return -1
 
