@@ -109,11 +109,6 @@ while True:
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n')
             
 
-        
-     
-
-
-
     elif int(inputs[0]) == 3:
         size = input("Indique tamaño de la muestra: ")
         orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
