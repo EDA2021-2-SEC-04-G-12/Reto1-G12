@@ -62,9 +62,9 @@ def printSortResults(ord_artist, sample=10):
             +" Fecha adquisición: "+artistas["DateAcquired"]+" URL: "+artistas["URL"])
             i+=1
 
-def printArtistData(artist):
+def printArtistData(artist, catalog):
     if artist:
-        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(artist['artWork'])+' pieces in his/her name at the museum.'))
+        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(catalog['artWork']["ConstituentID"])+' pieces in his/her name at the museum.'))
         for artist in lt.iterator(artist['artWork']):
             print('ObjectID: '+artist['ObjectID']+' Titulo: ' + artist['Title'] + '  Medio: ' + artist['Medium']+ '  Fecha: ' + artist['Date']+ '  Dimensiones: ' + artist['Dimensions']+ '  Fecha Adquisición: ' + artist['DateAcquired']+ '  Departamento: ' + artist['Department']+ '  Clasificación: ' + artist['Classification']+ '  URL: ' + artist['URL'])
     else:
@@ -122,7 +122,7 @@ while True:
     elif int(inputs[0]) == 4:
         artistname = input("Nombre del artista a buscar: ")
         artist = controller.getArtworksArtist(artistname, catalog)
-        printArtistData(artist)
+        printArtistData(artist, catalog)
         
 
     else:
