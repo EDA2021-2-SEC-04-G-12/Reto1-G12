@@ -93,8 +93,23 @@ while True:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
-        print("Hay "+str(lt.size(artistas)) + " artistas nacidos entre "+ str(anioinicial) + " y " + str(aniofinal))
-        print("-"*50)
+        tamanio = lt.size(artistas)
+        print("\nHay "+ str(tamanio) + " artistas nacidos entre "+ str(anioinicial) + " y " + str(aniofinal))
+        print("-"*50+"\n")
+        print("Primeros 3: \n") 
+        for i in range(1,4) : 
+            artista = lt.getElement(artistas,i)
+            print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
+            + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n') 
+        print("-"*50+"\n")
+        print("\nUltimos 3: \n")
+        for i in range(tamanio-3,tamanio+1) : 
+            artista = lt.getElement(artistas,i)
+            print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
+            + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n')
+            
+
+        
      
 
 
