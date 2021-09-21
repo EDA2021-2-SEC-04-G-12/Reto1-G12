@@ -104,7 +104,7 @@ def compareratings(artist1, artist2):
 
 def sortArtist(catalog):
     sa.sort(catalog['artist'])
-    
+
 def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
     stop = False
@@ -184,7 +184,7 @@ def countArtworks(artwork, catalog):
     artworkcount = 0
     pos = lt.isPresent(artworks, artwork)
     if pos > 0:
-        artwork_element = lt.getElement(artwork, pos)
+        artwork_element = lt.getElement(artworks, artwork)
         if artwork_element is not None:
             for artwork_artist in lt.iterator(catalog['artWork']):
                 if artwork_element['ConstituentID'] == artwork_artist['ConstituentID']:
