@@ -142,6 +142,9 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
     stop = False
     i = 1
+    start_time = time.process_time()
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
     while i <= lt.size(catalog["artista"]) and not stop:
         artist = lt.getElement(catalog["artista"],i)
         if anioinicial >= int(artist["BeginDate"]) and int(artist["BeginDate"]) <= aniofinal:
@@ -149,7 +152,7 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
         elif int(artist["BeginDate"]) > aniofinal:
             stop = True
         i += 1
-    return datosartist
+    return datosartist, elapsed_time_mseg
 
 
 
