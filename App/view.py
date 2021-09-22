@@ -114,7 +114,7 @@ while True:
         size = input("Indique tamaño de la muestra: ")
         orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
         result = controller.sortArtists(catalog, int(size),int(orden))
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+        print("Para la muestra de", size, " elementos en el requerimiento 2, el tiempo (mseg) es: ",
                                           str(result[0]))
         printSortResults(result[1])
 
