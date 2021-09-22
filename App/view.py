@@ -62,13 +62,13 @@ def printSortResults(ord_artist, sample=10):
             +" Fecha adquisición: "+artistas["DateAcquired"]+" URL: "+artistas["URL"])
             i+=1
 
-def printArtistData(catalog, artist):
-    total_obras = artist[1]
-    total_tecnicas = artist[2]
-    tecnica_mas_utilizada = artist[3]
-    lista_obras_tecnica = artist[4]
-    if artist != None:
-        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+ str(total_obras) +' pieces in his/her name at the museum.')
+def printArtistData(catalog, results):
+    total_obras = results[1]
+    total_tecnicas = results[2]
+    tecnica_mas_utilizada = results[3]
+    lista_obras_tecnica = results[4]
+    if results != None:
+        print(results['DisplayName']+' with MoMA ID '+results['ConstituentID']+'has'+ str(total_obras) +' pieces in his/her name at the museum.')
         print("There are " + str(total_tecnicas) + " different mediums/techniques in his/her work.")
         print("His/Her most used Medium/Techique is: " + str(tecnica_mas_utilizada))
         print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
@@ -129,9 +129,10 @@ while True:
 
     elif int(inputs[0]) == 4:
         artistname = input("Nombre del artista a buscar: ")
-        artist = controller.getArtworksArtist(artistname, catalog)
+        results = controller.getArtworksArtist(artistname, catalog)
         print("Para el requerimiento 3, el tiempo (mseg) es: " )
-        printArtistData(catalog, artist)
+        print(results)
+        printArtistData(catalog, results)
 
     else:
         sys.exit(0)
