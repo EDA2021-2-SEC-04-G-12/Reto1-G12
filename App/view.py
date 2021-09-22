@@ -64,7 +64,7 @@ def printSortResults(ord_artist, sample=10):
 
 def printArtistData(artist, catalog):
     if artist:
-        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(catalog['artWork']["ConstituentID"])+' pieces in his/her name at the museum.'))
+        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(artist['artWork']))+' pieces in his/her name at the museum.')
         for artist in lt.iterator(artist['artWork']):
             print('ObjectID: '+artist['ObjectID']+' Titulo: ' + artist['Title'] + '  Medio: ' + artist['Medium']+ '  Fecha: ' + artist['Date']+ '  Dimensiones: ' + artist['Dimensions']+ '  Fecha Adquisición: ' + artist['DateAcquired']+ '  Departamento: ' + artist['Department']+ '  Clasificación: ' + artist['Classification']+ '  URL: ' + artist['URL'])
     else:
