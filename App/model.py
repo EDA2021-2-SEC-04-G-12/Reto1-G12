@@ -260,3 +260,81 @@ def getArtworksArtist(artist, catalog):
 
         return artist
     return None
+
+#Funciones requerimiento 4
+def sortArtists(catalog,orden) : 
+    """
+    Organiza los artistas por su ConstituentID 
+    """
+    if orden == 1:
+      ins.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 2:
+      sa.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 3:
+      mer.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 4:
+      quic.sort(catalog['artista'], compareArtistbyID)
+
+
+
+def compareArtistbyID (artist1,artist2) : 
+    ID_1 = int(artist1['ConstituentID'])
+    ID_2 = int(artist2['ConstituentID'])
+    return ID_1 < ID_2
+
+def searchArtist (catalog,constituenID) : 
+    """
+    La funcion busca un artista por su constituent ID. 
+    """
+    artistas = catalog['artista']
+    low = 0 
+    high = lt.size(artistas)
+    mid = 0 
+
+    while low <= high : 
+        mid = (high + low) // 20
+        artist = lt.getElement(artistas,mid)
+        if artist['ConsitutentID'] < constituenID : 
+            low = mid + 1
+        elif artist['ConstituentID'] > constituenID : 
+            high = mid - 1
+        else : 
+            return mid 
+
+    return -1  
+        
+
+
+def rankArtbyCountry(catalog) : 
+    """
+    La funcion clasifica las obras por la nacionalidad de sus creadores 
+
+    """
+    ranking = {'Sin procedencia' : ''}
+    ranking['Sin procedencia'] = lt.newList('ARRAY_LIST')
+    tamanio_artWork = lt.size(catalog['artWork'])
+    sortArtists(catalog,2)
+    i = 1 
+    while i < tamanio_artWork :
+        artWork = lt.getElement(catalog['artWork'],i)
+        artistID = artWork['ConstituentID']
+        pos_artist = searchArtist(catalog,artistID)
+        artistInfo = lt.getElement(catalog['artista'],pos_artist)
+        procedencia = artistInfo['Nationality']
+        if len(ranking) == 0 and len(procedencia) > 0 : 
+            ranking[procedencia] = lt.newList('ARRAY_LIST')
+            lt.addLast(ranking[procedencia],artistInfo)
+        elif procedencia not in ranking.keys() and len(procedencia) > 0 : 
+            ranking[procedencia] = lt.newList 
+            lt.addLast(ranking[procedencia],artistInfo)
+        elif procedencia in ranking.keys() and len(procedencia) > 0: 
+            lt.addLast(ranking[procedencia],artistInfo)
+        else : 
+            lt.addLast(ranking['Sin procedencia'],artistInfo)
+    
+    return ranking 
+
+            
+        
+        
+

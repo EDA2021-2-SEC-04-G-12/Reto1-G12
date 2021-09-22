@@ -83,8 +83,7 @@ def getArtworksArtist(artist_name, catalog):
     return artist
 
 def rankbyCountry(catalog) : 
-    for art in catalog['artWork'] : 
-        return art 
+    rank = model.rankArtbyCountry(catalog)
 
 def countArtworks(artwork, catalog):
     return model.countArtworks(artwork, catalog)
