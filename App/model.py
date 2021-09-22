@@ -127,8 +127,8 @@ def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan):
 
 # Funciones requerimiento 1
 
-def compareartists(artist1, artist):
-    if (artist1['ConstituendID'] == artist['ConstituendID']):
+def compareartists(artist1, artista):
+    if (artist1.lower() in artista['DisplayName'].lower()):
         return 0
     return -1
 
@@ -137,10 +137,14 @@ def compareratings(artist1, artist2):
 
 def sortArtist(catalog):
     sa.sort(catalog['artist'])
+
 def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
     stop = False
     i = 1
+    start_time = time.process_time()
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
     while i <= lt.size(catalog["artista"]) and not stop:
         artist = lt.getElement(catalog["artista"],i)
         if anioinicial >= int(artist["BeginDate"]) and int(artist["BeginDate"]) <= aniofinal:
@@ -148,7 +152,7 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
         elif int(artist["BeginDate"]) > aniofinal:
             stop = True
         i += 1
-    return datosartist
+    return datosartist, elapsed_time_mseg
 
 
 
@@ -222,22 +226,37 @@ def sortArtwork(catalog,orden):
 
 # Funciones requerimiento 3
 
+def cmpArtworks(artwork1, artwork2):
+    return artwork1["Medium"] < artwork2["Medium"]
+
 def getArtworksArtist(artist, catalog):
     posartist = lt.isPresent(catalog['artista'], artist)
     if posartist > 0:
+        artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
+        idartist = artist["ConstituentID"]
+        i = 1
+        while i <= lt.size(catalog["artWork"]):
+            artwork = lt.getElement(catalog["artWork"], i)
+            if idartist in artwork["ConstituentID"]:
+                lt.addLast(artworkartist, artwork)
+            i += 1
+        sorted_list = quic.sort(artworkartist, cmpArtworks)
+        j = 2
+        count = 0
+        mayor = 0
+        count1 = 0
+        name = ""
+        while j <= lt.size(sorted_list):
+            if lt.getElement(sorted_list, j)["Medium"] != lt.getElement(sorted_list, j-1)["Medium"]:
+                count += 1
+                if count1 > mayor:
+                    mayor = count1
+                    name = lt.getElement(sorted_list, j-1)["Medium"]
+                count1 = 0
+            else:
+                count1 += 1
+            j += 1
+
         return artist
     return None
-
-
-def countArtworks(artwork, catalog):
-    artworks = catalog['artWork']
-    artworkcount = 0
-    pos = lt.isPresent(artworks, artwork)
-    if pos > 0:
-        artwork_element = lt.getElement(artwork, pos)
-        if artwork_element is not None:
-            for artwork_artist in lt.iterator(catalog['artWork']):
-                if artwork_element['ConstituentID'] == artwork_artist['ConstituentID']:
-                    artworkcount += 1
-    return artworkcount
