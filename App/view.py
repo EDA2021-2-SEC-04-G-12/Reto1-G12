@@ -49,6 +49,8 @@ def initCatalog(listType):
 def loadData(catalog) : 
     controller.loadData(catalog)
 
+def listArtworkbyDate (fecha_inicial, fecha_final,catalog) : 
+    return controller.listArtworkbyDate(fecha_inicial, fecha_final,catalog)
 def printSortResults(ord_artist, sample=10):
     size = lt.size(ord_artist)
     if size > sample:
@@ -66,9 +68,13 @@ def printArtistData(artist):
     if artist:
         print(artist['name']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(artist['artWork'])+' pieces in his/her name at the museum.'))
         for artist in lt.iterator(artist['artWork']):
-            print('ObjectID: '+artist['ObjectID']+' Titulo: ' + artist['Title'] + '  Medio: ' + artist['Medium']+ '  Fecha: ' + artist['Date']+ '  Dimensiones: ' + artist['Dimensions']+ '  Fecha Adquisición: ' + artist['DateAcquired']+ '  Departamento: ' + artist['Department']+ '  Clasificación: ' + artist['Classification']+ '  URL: ' + artist['URL'])
+            print('ObjectID: '+artist['ObjectID']+' Titulo: ' + artist['Title'] + '  Medio: ' + artist['Medium']+ '  Fecha: ' + artist['Date']+ '  Dimensiones: ' + artist['Dimensions']+ '  Fecha Adquisición: ' \
+                + artist['DateAcquired']+ '  Departamento: ' + artist['Department']+ '  Clasificación: ' + artist['Classification']+ '  URL: ' + artist['URL'])
     else:
         print('No se encontro el artista')
+def printArtWork(artWork): 
+    print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
+
 
 
 catalog = None
@@ -110,16 +116,35 @@ while True:
             
 
     elif int(inputs[0]) == 3:
-        size = input("Indique tamaño de la muestra: ")
+        size = int(input("Indique tamaño de la muestra: "))
         orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
-        result = controller.sortArtists(catalog, int(size),int(orden))
+        result = controller.sortArtists(catalog, size,orden)
         print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
         printSortResults(result[1])
 
+    elif int(inputs[0]) == 4: 
+        fecha_inicial = input("Fecha inicial(AAAA-MM-DD): ")
+        fecha_final = input("Fecha final(A1AAA-MM-DD): ")
+        result = listArtworkbyDate(fecha_inicial,fecha_final,catalog)
+        print("El numero total de obras en el rango especificado es: " + str(lt.size(result[0]))) 
+        print("El numero de obras adquiridas por compra es: " + str(result[1]))
+        print('Las ultimas 3 obras en el rango son: \n')
+        for i in range(lt.size(result[0])-3,lt.size(result[0])): 
+            artwork = lt.getElement(result[0],i) 
+            printArtWork(artwork) 
+        print("\n" +"Las primeras 3 obras son: \n")
+        for i in range(1,4):
+            artwork = lt.getElement(result[0],i) 
+            printArtWork(artwork)
+        
+        
+            
+            
+        
 
 
-    elif int(inputs[0]) == 4:
+    elif int(inputs[0]) == 5:
         artistname = input("Nombre del artista a buscar: ")
         artist = controller.getArtworksArtist(artistname, catalog)
         printArtistData(artist)
