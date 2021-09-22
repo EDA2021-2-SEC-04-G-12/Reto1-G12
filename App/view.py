@@ -92,8 +92,8 @@ while True:
     elif int(inputs[0]) == 2:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
-        print("Para el requerimiento 1, el tiempo (mseg) es: ", str(result[1]))
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
+        print("Para el requerimiento 1, el tiempo (mseg) es: ", str(artistas[1]))
         tamanio = lt.size(artistas)
         print("\nHay "+ str(tamanio) + " artistas nacidos entre "+ str(anioinicial) + " y " + str(aniofinal))
         print("-"*50+"\n")
