@@ -63,6 +63,14 @@ def printSortResults(ord_artist, sample=10):
             i+=1
 
 def printArtistData(catalog, artist, total_obras, total_tecnicas, tecnica_mas_utilizada, lista_obras_tecnica):
+    if artist:
+        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+ str(total_obras) +' pieces in his/her name at the museum.')
+        print("There are " + str(total_tecnicas) + " different mediums/techniques in his/her work.")
+        print("His/Her most used Medium/Techique is: " + str(tecnica_mas_utilizada))
+        print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
+    
+    else:
+        print('No se encontro el artista')
     
 
 
