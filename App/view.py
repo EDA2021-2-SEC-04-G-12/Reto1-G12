@@ -50,6 +50,11 @@ def loadData(catalog) :
 
 def listArtworkbyDate (fecha_inicial, fecha_final,catalog) : 
     return controller.listArtworkbyDate(fecha_inicial, fecha_final,catalog)
+def rankbyCountry(catalog) : 
+    controller.rankbyCountry(catalog)
+
+#Funciones de print 
+
 def printSortResults(ord_artist, sample=10):
     size = lt.size(ord_artist)
     if size > sample:
@@ -137,17 +142,11 @@ while True:
         for i in range(1,4):
             artwork = lt.getElement(result[0],i) 
             printArtWork(artwork)
-        
-        
-            
-            
-        
-
+    
 
     elif int(inputs[0]) == 5:
-        artistname = input("Nombre del artista a buscar: ")
-        artist = controller.getArtworksArtist(artistname, catalog)
-        printArtistData(artist, catalog)
+        print('Clasificando obras...') 
+        result = rankbyCountry(catalog) 
         
 
     else:
