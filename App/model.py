@@ -207,21 +207,37 @@ def sortArtists(catalog, size, orden):
 
 # Funciones requerimiento 3
 
+def cmpArtworks(artwork1, artwork2):
+    return artwork1["Medium"] < artwork2["Medium"]
+
 def getArtworksArtist(artist, catalog):
     posartist = lt.isPresent(catalog['artista'], artist)
     if posartist > 0:
+        artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
+        idartist = artist["ConstituentID"]
+        i = 1
+        while i <= lt.size(catalog["artWork"]):
+            artwork = lt.getElement(catalog["artWork"], i)
+            if idartist in artwork["ConstituentID"]:
+                lt.addLast(artworkartist, artwork)
+            i += 1
+        sorted_list = quic.sort(artworkartist, cmpArtworks)
+        j = 2
+        count = 0
+        mayor = 0
+        count1 = 0
+        name = ""
+        while j <= lt.size(sorted_list):
+            if lt.getElement(sorted_list, j)["Medium"] != lt.getElement(sorted_list, j-1)["Medium"]:
+                count += 1
+                if count1 > mayor:
+                    mayor = count1
+                    name = lt.getElement(sorted_list, j-1)["Medium"]
+                count1 = 0
+            else:
+                count1 += 1
+            j += 1
+
         return artist
     return None
-
-def countArtworks(artwork, catalog):
-    artworks = catalog['artWork']
-    artworkcount = 0
-    pos = lt.isPresent(artworks, artwork)
-    if pos > 0:
-        artwork_element = lt.getElement(artworks, pos)
-        if artwork_element is not None:
-            for artwork_artist in lt.iterator(catalog['artWork']):
-                if artwork_element['ConstituentID'] == artwork_artist['ConstituentID']:
-                    artworkcount += 1
-    return artworkcount
