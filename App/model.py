@@ -251,8 +251,8 @@ def getArtworksArtist(artist, catalog):
         mayor = 0
         count1 = 0
         name = ""
-        total_obras = lt.size(sorted_list)
         while j <= lt.size(sorted_list):
+            total_obras = lt.size(sorted_list)
             if lt.getElement(sorted_list, j)["Medium"] != lt.getElement(sorted_list, j+1)["Medium"]:
                 name = lt.getElement(sorted_list, j)["Medium"]
                 count += 1
