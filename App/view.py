@@ -147,7 +147,7 @@ while True:
         artistname = input("Nombre del artista a buscar: ")
         artists = controller.getArtworksArtist(artistname, catalog)
         print(artists)
-        if artists[0] != None:
+        if artists != None:
             print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[5]))
             printArtistData(catalog, artists)
         else:
