@@ -147,7 +147,7 @@ while True:
         print("-"*50 +'\n')
 
         j = 0 
-    elif int(inputs[0]) == 7:
+    elif int(inputs[0]) == 6:
         departamento = input("Departamento : ")
         result = transportar(catalog,departamento)        
 
