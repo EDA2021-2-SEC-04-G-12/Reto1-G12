@@ -234,7 +234,7 @@ def getArtworksArtist(artist, catalog):
     if posartist > 0:
         artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
-        idartist = artist["ConstituentID"]
+        idartist = int(artist["ConstituentID"])
         i = 1
         while i <= lt.size(catalog["artWork"]):
             artwork = lt.getElement(catalog["artWork"], i)
@@ -294,9 +294,10 @@ def searchArtist (catalog,constituenID) :
     while low <= high : 
         mid = (high + low) // 2
         artist = lt.getElement(artistas,mid)
-        if artist['ConstituentID'] < constituenID : 
+        ID = int(artist['ConstituentID'])
+        if ID < constituenID : 
             low = mid + 1
-        elif artist['ConstituentID'] > constituenID : 
+        elif ID > constituenID : 
             high = mid - 1
         else : 
             return mid 
@@ -317,20 +318,20 @@ def rankArtbyCountry(catalog) :
     i = 1 
     while i < tamanio_artWork :
         artWork = lt.getElement(catalog['artWork'],i)
-        artistID = artWork['ConstituentID']
-        pos_artist = searchArtist(catalog,artistID)
-        artistInfo = lt.getElement(catalog['artista'],pos_artist)
-        procedencia = artistInfo['Nationality']
-        if len(ranking) == 0 and len(procedencia) > 0 : 
-            ranking[procedencia] = lt.newList('ARRAY_LIST')
-            lt.addLast(ranking[procedencia],artistInfo)
-        elif procedencia not in ranking.keys() and len(procedencia) > 0 : 
-            ranking[procedencia] = lt.newList 
-            lt.addLast(ranking[procedencia],artistInfo)
-        elif procedencia in ranking.keys() and len(procedencia) > 0: 
-            lt.addLast(ranking[procedencia],artistInfo)
-        else : 
-            lt.addLast(ranking['Sin procedencia'],artistInfo)
+        lista_ID = artWork['ConstituentID'].strip("[]").split(",") 
+        for id in lista_ID :  
+            ID = int(id)   
+            pos_artist = searchArtist(catalog,ID)
+            artistInfo = lt.getElement(catalog['artista'],pos_artist)
+            procedencia = artistInfo['Nationality']
+            if procedencia not in ranking.keys() and len(procedencia) > 0 : 
+                ranking[procedencia] = lt.newList('ARRAY_LIST') 
+                lt.addLast(ranking[procedencia],artistInfo)
+            elif procedencia in ranking.keys() and len(procedencia) > 0: 
+                lt.addLast(ranking[procedencia],artistInfo)
+            else : 
+                lt.addLast(ranking['Sin procedencia'],artistInfo)
+        i+=1 
     
     return ranking 
 
