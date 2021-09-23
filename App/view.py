@@ -78,8 +78,14 @@ def printArtistData(catalog, artists):
     if artists != None:
         print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+ str(total_obras) +' pieces in his/her name at the museum.')
         print("There are " + str(total_tecnicas) + " different mediums/techniques in his/her work.")
-        print("His/Her most used Medium/Techique is: " + str(tecnica_mas_utilizada))
-        print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
+        if tecnica_mas_utilizada != "":
+            print("His/Her most used Medium/Techique is: " + str(tecnica_mas_utilizada))
+        else: 
+            print ("No tiene técnicas")
+        if lt.size(lista_obras_tecnica) >= 1:
+            print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
+        else:
+            print("No tiene obras")
     
     else:
         print('No se encontro el artista')
