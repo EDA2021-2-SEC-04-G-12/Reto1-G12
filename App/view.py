@@ -149,12 +149,7 @@ while True:
         j = 0 
     elif int(inputs[0]) == 7:
         departamento = input("Departamento : ")
-        result = transportar(catalog,departamento)
-
-        
-        
-
-        
+        result = transportar(catalog,departamento)        
 
     else:
         sys.exit(0)
