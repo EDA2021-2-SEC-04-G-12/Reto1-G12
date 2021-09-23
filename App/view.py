@@ -149,8 +149,7 @@ while True:
         artistname = input("Nombre del artista a buscar: ")
         artists = controller.getArtworksArtist(artistname, catalog)
         print(artists)
-        print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[5]))
-        printArtistData(catalog, artists)
+        
 
     elif int(inputs[0]) == 5:
         print('Clasificando obras...') 
