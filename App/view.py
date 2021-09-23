@@ -38,8 +38,7 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Listar cronológicamente los artistas")
-    print("3- Ordenar cronológicamente las adquisiciones")
-    print("4- Clasificar las obras de un artista por técnica")
+    print("4- Ordenar cronológicamente las adquisiciones")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
     print("6- Transportar obras de un departamento")
     print("7- Proponer una nueva exposición en el museo")
@@ -51,6 +50,11 @@ def loadData(catalog) :
 
 def listArtworkbyDate (fecha_inicial, fecha_final,catalog) : 
     return controller.listArtworkbyDate(fecha_inicial, fecha_final,catalog)
+def rankbyCountry(catalog) : 
+    controller.rankbyCountry(catalog)
+
+#Funciones de print 
+
 def printSortResults(ord_artist, sample=10):
     size = lt.size(ord_artist)
     if size > sample:
@@ -64,9 +68,9 @@ def printSortResults(ord_artist, sample=10):
             +" Fecha adquisición: "+artistas["DateAcquired"]+" URL: "+artistas["URL"])
             i+=1
 
-def printArtistData(artist):
+def printArtistData(artist, catalog):
     if artist:
-        print(artist['name']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(artist['artWork'])+' pieces in his/her name at the museum.'))
+        print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+str(lt.size(artist['artWork']))+' pieces in his/her name at the museum.')
         for artist in lt.iterator(artist['artWork']):
             print('ObjectID: '+artist['ObjectID']+' Titulo: ' + artist['Title'] + '  Medio: ' + artist['Medium']+ '  Fecha: ' + artist['Date']+ '  Dimensiones: ' + artist['Dimensions']+ '  Fecha Adquisición: ' \
                 + artist['DateAcquired']+ '  Departamento: ' + artist['Department']+ '  Clasificación: ' + artist['Classification']+ '  URL: ' + artist['URL'])
@@ -99,18 +103,19 @@ while True:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
         artistas = controller.listCronoArtist(anioinicial,aniofinal,catalog)
-        tamanio = lt.size(artistas)
+        print("Para el requerimiento 1, el tiempo (mseg) es: ", str(artistas[1]))
+        tamanio = lt.size(artistas[0])
         print("\nHay "+ str(tamanio) + " artistas nacidos entre "+ str(anioinicial) + " y " + str(aniofinal))
         print("-"*50+"\n")
         print("Primeros 3: \n") 
         for i in range(1,4) : 
-            artista = lt.getElement(artistas,i)
+            artista = lt.getElement(artistas[0],i)
             print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n') 
         print("-"*50+"\n")
         print("\nUltimos 3: \n")
         for i in range(tamanio-3,tamanio+1) : 
-            artista = lt.getElement(artistas,i)
+            artista = lt.getElement(artistas[0],i)
             print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n')
             
@@ -118,8 +123,8 @@ while True:
     elif int(inputs[0]) == 3:
         size = int(input("Indique tamaño de la muestra: "))
         orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
-        result = controller.sortArtists(catalog, size,orden)
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+        result = controller.sortArtists(catalog, int(size),int(orden))
+        print("Para la muestra de", size, " elementos en el requerimiento 2, el tiempo (mseg) es: ",
                                           str(result[0]))
         printSortResults(result[1])
 
@@ -137,17 +142,11 @@ while True:
         for i in range(1,4):
             artwork = lt.getElement(result[0],i) 
             printArtWork(artwork)
-        
-        
-            
-            
-        
-
+    
 
     elif int(inputs[0]) == 5:
-        artistname = input("Nombre del artista a buscar: ")
-        artist = controller.getArtworksArtist(artistname, catalog)
-        printArtistData(artist)
+        print('Clasificando obras...') 
+        result = rankbyCountry(catalog) 
         
 
     else:

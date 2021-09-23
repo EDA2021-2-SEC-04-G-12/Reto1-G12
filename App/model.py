@@ -292,9 +292,9 @@ def searchArtist (catalog,constituenID) :
     mid = 0 
 
     while low <= high : 
-        mid = (high + low) // 20
+        mid = (high + low) // 2
         artist = lt.getElement(artistas,mid)
-        if artist['ConsitutentID'] < constituenID : 
+        if artist['ConstituentID'] < constituenID : 
             low = mid + 1
         elif artist['ConstituentID'] > constituenID : 
             high = mid - 1
