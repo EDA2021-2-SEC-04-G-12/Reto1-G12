@@ -271,4 +271,6 @@ def getArtworksArtist(artist, catalog):
         total_obras = lt.size(sorted_list)
         total_tecnicas = count
         tecnica_mas_utilizada = name
+    else: 
+        None
     return artist, total_obras, total_tecnicas, tecnica_mas_utilizada, lista_obras_tecnica, elapsed_time_mseg
