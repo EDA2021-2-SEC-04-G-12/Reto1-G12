@@ -87,9 +87,6 @@ def printArtistData(catalog, artists):
         else:
             print("No tiene obras")
     
-    else:
-        print('No se encontro el artista')
-    
 def printArtWork(artWork): 
     print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
 
@@ -149,8 +146,12 @@ while True:
     elif int(inputs[0]) == 4:
         artistname = input("Nombre del artista a buscar: ")
         artists = controller.getArtworksArtist(artistname, catalog)
-        print("Para el requerimiento 3, el tiempo (mseg) es: ")
-        printArtistData(catalog, artists)
+        if artists[0] == None:
+            print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[0]))
+            print('No se encontro el artista')
+        else:
+            print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[5]))
+            printArtistData(catalog, artists)
 
     elif int(inputs[0]) == 5:
         print('Clasificando obras...') 
