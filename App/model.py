@@ -128,8 +128,8 @@ def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan):
 
 # Funciones requerimiento 1
 
-def compareartists(artist1, artista):
-    if (artist1.lower() in artista['DisplayName'].lower()):
+def compareartists(artist1, artist):
+    if (artist1['ConstituendID'] == artist['ConstituendID']):
         return 0
     return -1
 
