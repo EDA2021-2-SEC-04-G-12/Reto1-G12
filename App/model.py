@@ -160,9 +160,17 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
 # Funciones requerimiento 2
 
 def cmpArtworkByDateAcquired(artwork1,artwork2):
-    fechaObraA = date.date(int(artwork1["DateAcquired"].split("-")[0]),int(artwork1["DateAcquired"].split("-")[1]),int(artwork1["DateAcquired"].split("-")[2]))
-    fechaObraB = date.date(int(artwork2["DateAcquired"].split("-")[0]),int(artwork2["DateAcquired"].split("-")[1]),int(artwork2["DateAcquired"].split("-")[2]))
-    return (fechaObraA < fechaObraB)
+    cadena_fecha_A = artwork1['DateAcquired']
+    cadena_fecha_B = artwork2['DateAcquired']
+    if len(cadena_fecha_A) > 0 and len(cadena_fecha_B) > 0: 
+        fecha_A = date.datetime.strptime(cadena_fecha_A,'%Y-%m-%d')
+        fecha_B = date.datetime.strptime(cadena_fecha_B,'%Y-%m-%d')
+        return fecha_A < fecha_B
+    elif len(cadena_fecha_A) > 0 and len(cadena_fecha_B) == 0 : 
+        return True
+    elif len(cadena_fecha_A) == 0 and len(cadena_fecha_B) > 0 : 
+        return False 
+
 
 def sortDateInsertion(catalog):
     ins.sort(catalog['Artworks'], cmpArtworkByDateAcquired)
@@ -176,34 +184,45 @@ def sortDateMerge(catalog):
 def sortDateQuick(catalog):
     quic.sort(catalog['Artworks'], cmpArtworkByDateAcquired)
 
-def listCronoAcquired(fechainicial,fechafinal,catalog):
+def listArtworkbyDate(fechainicial,fechafinal,catalog):
+    size= lt.size(catalog['artWork'])
+    sortArtwork(catalog,2)
     datosart = lt.newList("ARRAY_LIST")
     stop = False
     i = 1
-    while i <= lt.size(catalog["Artworks"]) and not stop:
-        obra = lt.getElement(catalog["Artworks"],i)
-        if fechainicial <= obra["DateAcquired"] and obra["DateAcquired"] <= fechafinal:
-            lt.addLast(datosart,obra)
-        elif obra["DateAcquired"] > fechafinal:
-            stop = True
+    while i <= size and not stop:
+        obra = lt.getElement(catalog['artWork'],i)
+        if len(obra['DateAcquired']) > 0 :
+            fecha_obra  = date.datetime.strptime(obra['DateAcquired'],'%Y-%m-%d') 
+            if fechainicial <= fecha_obra and fechafinal >= fecha_obra : 
+                lt.addLast(datosart,obra) 
+            elif fecha_obra > fechafinal : 
+                stop = True 
         i += 1
     return datosart
-
-def sortArtists(catalog, size, orden):
-    sub_list = lt.subList(catalog['artWork'], 1, size)
-    sub_list = sub_list.copy()
-    start_time = time.process_time()
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
+def countPurchasedArtwork(artworks) : 
+    """
+    Cuenta el numero de obras adquiridas por purchase. 
+    """
+    size = lt.size(artworks)
+    i = 1 
+    count = 0 
+    while i < size : 
+        artwork = lt.getElement(artworks, i)
+        if 'Purchase' in  artwork['CreditLine'] : 
+            count += 1 
+        i += 1 
+    return count 
+        
+def sortArtwork(catalog,orden):
     if orden == 1:
-        sorted_list = ins.sort(sub_list, cmpArtworkByDateAcquired)
+      ins.sort(catalog['artWork'], cmpArtworkByDateAcquired)
     elif orden == 2:
-        sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
+      sa.sort(catalog['artWork'], cmpArtworkByDateAcquired)
     elif orden == 3:
-        sorted_list = mer.sort(sub_list, cmpArtworkByDateAcquired)
+      mer.sort(catalog['artWork'], cmpArtworkByDateAcquired)
     elif orden == 4:
-        sorted_list = quic.sort(sub_list, cmpArtworkByDateAcquired)
-    return elapsed_time_mseg, sorted_list
+      quic.sort(catalog['artWork'], cmpArtworkByDateAcquired)
 
 
 # Funciones requerimiento 3

@@ -24,6 +24,7 @@ from time import thread_time
 import config as cf
 import model
 from DISClib.Algorithms.Sorting import shellsort as sa
+import datetime as date 
 import csv
 
 """
@@ -45,7 +46,7 @@ def loadData(catalog):
     loadArtists(catalog)
 
 def loadartWork(catalog): 
-    artWorkfile = cf.data_dir + 'Artworks-utf8-10pct.csv'
+    artWorkfile = cf.data_dir + 'Artworks-utf8-small.csv'
     input_file = csv.DictReader(open(artWorkfile, encoding='utf-8'))
     for video in input_file :
         model.addartWork(catalog,video)
@@ -54,7 +55,7 @@ def loadArtists(catalog):
     """
     #TODO:DOCUMENTACION 
     """
-    artistsfile = cf.data_dir +'Artists-utf8-10pct.csv'
+    artistsfile = cf.data_dir +'Artists-utf8-small.csv'
     input_file = csv.DictReader(open(artistsfile, encoding='utf-8'))
     for artista in input_file:
         model.addArtists_2(catalog, artista)
@@ -63,8 +64,13 @@ def loadArtists(catalog):
 
 def sortArtists(catalog, size, orden):
     return model.sortArtists(catalog, size, orden)
-
-
+    
+def listArtworkbyDate (fecha_inicial, fecha_final,catalog) : 
+    fecha_A = date.datetime.strptime(fecha_inicial,'%Y-%m-%d')
+    fecha_B = date.datetime.strptime(fecha_final,'%Y-%m-%d')
+    artWorks = model.listArtworkbyDate(fecha_A, fecha_B,catalog)
+    Cuenta_purchase = model.countPurchasedArtwork(artWorks)
+    return artWorks,Cuenta_purchase 
 
 def listCronoArtist(anioinicial,aniofinal,catalog):
 
@@ -75,6 +81,9 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
 def getArtworksArtist(artist_name, catalog):
     return model.getArtworksArtist(artist_name, catalog)
 
+def rankbyCountry(catalog) : 
+    for art in catalog['artWork'] : 
+        return art 
 
 def countArtworks(artwork, catalog):
     return model.countArtworks(artwork, catalog)
