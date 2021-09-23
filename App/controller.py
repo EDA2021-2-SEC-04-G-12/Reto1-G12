@@ -79,8 +79,7 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
 # Funciones de consulta sobre el catálogo
 
 def getArtworksArtist(artist_name, catalog):
-    artist = model.getArtworksArtist(artist_name, catalog)
-    return artist
+    return model.getArtworksArtist(artist_name, catalog)
 
 def rankbyCountry(catalog) : 
     for art in catalog['artWork'] : 
