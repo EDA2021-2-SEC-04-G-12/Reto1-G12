@@ -42,7 +42,6 @@ def printMenu():
     print("4- Clasificar las obras por técnicas del artista")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
     print("6- Transportar obras de un departamento")
-    print("7- Función de ordenamiento laboratorio 3")
 
 def initCatalog(listType): 
     return controller.initCatalog(listType)
