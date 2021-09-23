@@ -61,7 +61,7 @@ def addartWork (catalog, artWork):
     """ #TODO:Documentacion.
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
-    art = newartWork(artWork['ConstituentID'],artWork['Date'],artWork['Medium'],artWork['Dimensions'],artWork['CreditLine'],\
+    art = newartWork(artWork['ConstituentID'],artWork['Title'], artWork['Date'],artWork['Medium'],artWork['Dimensions'],artWork['CreditLine'],\
         artWork['AccessionNumber'],artWork['Classification'],artWork['Department'],artWork['DateAcquired'],artWork['Cataloged'],\
             artWork['ObjectID'],artWork['URL'],artWork['Circumference (cm)'],artWork['Depth (cm)'],artWork['Diameter (cm)'],artWork['Height (cm)'],\
                 artWork['Length (cm)'],artWork['Weight (kg)'],artWork['Width (cm)'],artWork['Seat Height (cm)'],artWork['Duration (sec.)'])
@@ -78,12 +78,13 @@ def addArtists_2 (catalog, artist):
 
 
 # Funciones para creacion de datos
-def newartWork (ConstituentID,date,medium,dimensions,creditLine,accessionNumber,clasification,department,\
+def newartWork (ConstituentID, title, date,medium,dimensions,creditLine,accessionNumber,clasification,department,\
     dateAquired,Cataloged,objectId,URL,circumference,depth,diameter,height,length,weight,width,seatHeight,duration): 
-    ArtWork = {'ConstituentID':'','Date':'','Medium':'','Dimensions':'','CreditLine':'','AccessionNumber':'',\
+    ArtWork = {'ConstituentID':'', 'Title': '', 'Date':'','Medium':'','Dimensions':'','CreditLine':'','AccessionNumber':'',\
         'Classification':'','Department':'','DateAcquired':'','Cataloged':'','ObjectID':'','URL':'','Circumference':'',\
             'Depth':'','Diameter':'','Height':'','Length':'','Weight':'','Width':'','Seat Height':'','Duration':''}
     ArtWork['ConstituentID'] = ConstituentID
+    ArtWork['Title'] = title
     ArtWork['Date'] = date
     ArtWork['Medium'] = medium
     ArtWork['Dimensions'] = dimensions
