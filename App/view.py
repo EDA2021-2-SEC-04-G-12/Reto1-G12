@@ -80,14 +80,8 @@ def printArtistData(catalog, artists):
     if artists != None:
         print(artist['DisplayName']+' with MoMA ID '+artist['ConstituentID']+'has'+ str(total_obras) +' pieces in his/her name at the museum.')
         print("There are " + str(total_tecnicas) + " different mediums/techniques in his/her work.")
-        if tecnica_mas_utilizada != "":
-            print("His/Her most used Medium/Techique is: " + str(tecnica_mas_utilizada))
-        else: 
-            print ("No tiene técnicas")
-        if lt.size(lista_obras_tecnica) >= 1:
-            print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
-        else:
-            print("No tiene obras")
+        print("His/Her most used Medium/Techique is: " + str(tecnica_mas_utilizada))
+        print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
     
     else:
         print('No se encontro el artista')
@@ -134,26 +128,11 @@ while True:
             artista = lt.getElement(artistas[0],i)
             print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n')
-
-    elif int(inputs[0]) == 3: 
-        fecha_inicial = input("Fecha inicial(AAAA-MM-DD): ")
-        fecha_final = input("Fecha final(A1AAA-MM-DD): ")
-        result = listArtworkbyDate(fecha_inicial,fecha_final,catalog)
-        print("El numero total de obras en el rango especificado es: " + str(lt.size(result[0]))) 
-        print("El numero de obras adquiridas por compra es: " + str(result[1]))
-        print('Las ultimas 3 obras en el rango son: \n')
-        for i in range(lt.size(result[0])-3,lt.size(result[0])): 
-            artwork = lt.getElement(result[0],i) 
-            printArtWork(artwork) 
-        print("\n" +"Las primeras 3 obras son: \n")
-        for i in range(1,4):
-            artwork = lt.getElement(result[0],i) 
-            printArtWork(artwork)
     
     elif int(inputs[0]) == 4:
         artistname = input("Nombre del artista a buscar: ")
         artists = controller.getArtworksArtist(artistname, catalog)
-        print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[5]))
+        print("Para el requerimiento 3, el tiempo (mseg) es: " )
         print(artists)
         printArtistData(catalog, artists)
 
