@@ -129,7 +129,7 @@ def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan):
 # Funciones requerimiento 1
 
 def compareartists(artist1, artista):
-    if (artist1.lower() in artista['DisplayName'].lower()):
+    if (artist1['DisplayName'].lower() in artista['DisplayName'].lower()):
         return 0
     return -1
 
@@ -238,7 +238,7 @@ def getArtworksArtist(artist, catalog):
     if posartist > 0:
         artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
-        idartist = artist["ConstituentID"]
+        idartist = int(artist["ConstituentID"])
         i = 1
         while i <= lt.size(catalog["artWork"]):
             artwork = lt.getElement(catalog["artWork"], i)
@@ -273,3 +273,102 @@ def getArtworksArtist(artist, catalog):
         tecnica_mas_utilizada = name
         return artist, total_obras, total_tecnicas, tecnica_mas_utilizada, lista_obras_tecnica, elapsed_time_mseg
     return None
+
+#Funciones requerimiento 4
+def sortArtists(catalog,orden) : 
+    """
+    Organiza los artistas por su ConstituentID 
+    """
+    if orden == 1:
+      ins.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 2:
+      sa.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 3:
+      mer.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 4:
+      quic.sort(catalog['artista'], compareArtistbyID)
+
+
+
+def compareArtistbyID (artist1,artist2) : 
+    ID_1 = int(artist1['ConstituentID'])
+    ID_2 = int(artist2['ConstituentID'])
+    return ID_1 < ID_2
+
+def searchArtist (catalog,constituenID) : 
+    """
+    La funcion busca un artista por su constituent ID. 
+    """
+    artistas = catalog['artista']
+    low = 0 
+    high = lt.size(artistas)
+    mid = 0 
+
+    while low <= high : 
+        mid = (high + low) // 2
+        artist = lt.getElement(artistas,mid)
+        ID = int(artist['ConstituentID'])
+        if ID < constituenID : 
+            low = mid + 1
+        elif ID > constituenID : 
+            high = mid - 1
+        else : 
+            return mid 
+
+    return -1  
+        
+
+
+def rankArtbyCountry(catalog) : 
+    """
+    La funcion clasifica las obras por la nacionalidad de sus creadores 
+
+    """
+    ranking = {'NA' : lt.newList('ARRAY_LIST')}
+    tamanio_artWork = lt.size(catalog['artWork'])
+    sortArtists(catalog,2)
+    i = 1 
+    while i < tamanio_artWork :
+        artWork = lt.getElement(catalog['artWork'],i)
+        artWork['ArtistsNames'] = ""
+        lista_ID = artWork['ConstituentID'].strip("[]").split(",") 
+        for id in lista_ID :  
+            ID = int(id)   
+            pos_artist = searchArtist(catalog,ID)
+            artistInfo = lt.getElement(catalog['artista'],pos_artist)
+            artWork['ArtistsNames'] += artistInfo['DisplayName'] + ','
+            procedencia = artistInfo['Nationality']
+            if procedencia not in ranking.keys() and len(procedencia) > 0 : 
+                ranking[procedencia] = lt.newList('ARRAY_LIST') 
+                lt.addLast(ranking[procedencia],artWork)
+            elif procedencia in ranking.keys() and len(procedencia) > 0: 
+                lt.addLast(ranking[procedencia],artWork)
+            else : 
+                lt.addLast(ranking['NA'],artWork)
+        i+=1 
+    return ranking 
+
+def sortRank (rank) : 
+    """
+    La funcion ordena la clasificacion de artWork por paises
+    """
+    lista = lt.newList('ARRAY_LIST')
+    for k,v in rank.items() : 
+        lt.addLast(lista,{"Nationality":k,"ArtWorks":v})
+    lista_sort = ins.sort(lista,comp_tamanio)
+    return lista_sort 
+
+def comp_tamanio (elemento1,elemento2):
+    t1 = lt.size(elemento1['ArtWorks'])
+    t2 = lt.size(elemento2['ArtWorks'])
+    return t1 < t2
+        
+         
+    
+    
+
+
+            
+        
+        
+
