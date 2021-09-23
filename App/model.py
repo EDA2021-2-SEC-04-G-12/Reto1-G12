@@ -61,7 +61,7 @@ def addartWork (catalog, artWork):
     """ #TODO:Documentacion.
     Para cada video, se añade al catalogo, se extrae el artista y ... 
     """
-    art = newartWork(artWork['ConstituentID'],artWork['Title'], artWork['Date'],artWork['Medium'],artWork['Dimensions'],artWork['CreditLine'],\
+    art = newartWork(artWork['ConstituentID'],artWork['Date'],artWork['Medium'],artWork['Dimensions'],artWork['CreditLine'],\
         artWork['AccessionNumber'],artWork['Classification'],artWork['Department'],artWork['DateAcquired'],artWork['Cataloged'],\
             artWork['ObjectID'],artWork['URL'],artWork['Circumference (cm)'],artWork['Depth (cm)'],artWork['Diameter (cm)'],artWork['Height (cm)'],\
                 artWork['Length (cm)'],artWork['Weight (kg)'],artWork['Width (cm)'],artWork['Seat Height (cm)'],artWork['Duration (sec.)'])
@@ -78,13 +78,12 @@ def addArtists_2 (catalog, artist):
 
 
 # Funciones para creacion de datos
-def newartWork (ConstituentID, title, date,medium,dimensions,creditLine,accessionNumber,clasification,department,\
+def newartWork (ConstituentID,date,medium,dimensions,creditLine,accessionNumber,clasification,department,\
     dateAquired,Cataloged,objectId,URL,circumference,depth,diameter,height,length,weight,width,seatHeight,duration): 
-    ArtWork = {'ConstituentID':'', 'Title': '', 'Date':'','Medium':'','Dimensions':'','CreditLine':'','AccessionNumber':'',\
+    ArtWork = {'ConstituentID':'','Date':'','Medium':'','Dimensions':'','CreditLine':'','AccessionNumber':'',\
         'Classification':'','Department':'','DateAcquired':'','Cataloged':'','ObjectID':'','URL':'','Circumference':'',\
             'Depth':'','Diameter':'','Height':'','Length':'','Weight':'','Width':'','Seat Height':'','Duration':''}
     ArtWork['ConstituentID'] = ConstituentID
-    ArtWork['Title'] = title
     ArtWork['Date'] = date
     ArtWork['Medium'] = medium
     ArtWork['Dimensions'] = dimensions
@@ -232,9 +231,6 @@ def cmpArtworks(artwork1, artwork2):
 
 def getArtworksArtist(artist, catalog):
     posartist = lt.isPresent(catalog['artista'], artist)
-    start_time = time.process_time()
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
     if posartist > 0:
         artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
@@ -261,14 +257,79 @@ def getArtworksArtist(artist, catalog):
             else:
                 count1 += 1
             j += 1
-        k = 2
-        lista_obras_tecnica = lt.newList()
-        while k <= lt.size(sorted_list):
-            obra = lt.getElement(sorted_list, k)
-            if lt.getElement(sorted_list, j)["Medium"] == lt.getElement(sorted_list, j-1)["Medium"]:
-                lt.addLast(lista_obras_tecnica, obra)
-        total_obras = lt.size(sorted_list)
-        total_tecnicas = count
-        tecnica_mas_utilizada = name
-        return artist, total_obras, total_tecnicas, tecnica_mas_utilizada, lista_obras_tecnica, elapsed_time_mseg
+
+        return artist
     return None
+
+#Funciones requerimiento 4
+def sortArtists(catalog,orden) : 
+    """
+    Organiza los artistas por su ConstituentID 
+    """
+    if orden == 1:
+      ins.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 2:
+      sa.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 3:
+      mer.sort(catalog['artista'], compareArtistbyID)
+    elif orden == 4:
+      quic.sort(catalog['artista'], compareArtistbyID)
+
+
+
+def compareArtistbyID (artist1,artist2) : 
+    ID_1 = int(artist1['ConstituentID'])
+    ID_2 = int(artist2['ConstituentID'])
+    return ID_1 < ID_2
+
+def searchArtist (catalog,constituenID) : 
+    """
+    La funcion busca un artista por su constituent ID. 
+    """
+    artistas = catalog['artista']
+    low = 0 
+    high = lt.size(artistas)
+    mid = 0 
+
+    while low <= high : 
+        mid = (high + low) // 2
+        artist = lt.getElement(artistas,mid)
+        if artist['ConstituentID'] < constituenID : 
+            low = mid + 1
+        elif artist['ConstituentID'] > constituenID : 
+            high = mid - 1
+        else : 
+            return mid 
+
+    return -1  
+        
+
+
+def rankArtbyCountry(catalog) : 
+    """
+    La funcion clasifica las obras por la nacionalidad de sus creadores 
+
+    """
+    ranking = {'Sin procedencia' : ''}
+    ranking['Sin procedencia'] = lt.newList('ARRAY_LIST')
+    tamanio_artWork = lt.size(catalog['artWork'])
+    sortArtists(catalog,2)
+    i = 1 
+    while i < tamanio_artWork :
+        artWork = lt.getElement(catalog['artWork'],i)
+        artistID = artWork['ConstituentID']
+        pos_artist = searchArtist(catalog,artistID)
+        artistInfo = lt.getElement(catalog['artista'],pos_artist)
+        procedencia = artistInfo['Nationality']
+        if len(ranking) == 0 and len(procedencia) > 0 : 
+            ranking[procedencia] = lt.newList('ARRAY_LIST')
+            lt.addLast(ranking[procedencia],artistInfo)
+        elif procedencia not in ranking.keys() and len(procedencia) > 0 : 
+            ranking[procedencia] = lt.newList 
+            lt.addLast(ranking[procedencia],artistInfo)
+        elif procedencia in ranking.keys() and len(procedencia) > 0: 
+            lt.addLast(ranking[procedencia],artistInfo)
+        else : 
+            lt.addLast(ranking['Sin procedencia'],artistInfo)
+    
+    return ranking 
