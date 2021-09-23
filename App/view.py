@@ -53,6 +53,8 @@ def listArtworkbyDate (fecha_inicial, fecha_final,catalog) :
     return controller.listArtworkbyDate(fecha_inicial, fecha_final,catalog)
 def rankbyCountry(catalog) : 
     return controller.rankbyCountry(catalog)
+def transportar(catalog,departamento) :
+    return controller.transportar(catalog,departamento)
 
 #Funciones de print 
 
@@ -164,8 +166,12 @@ while True:
         for i in range(lt.size(result),lt.size(result)-10,-1) : 
             printRank(lt.getElement(result,i))
         print("-"*50 +'\n')
+
         j = 0 
-        print(primero['ArtWorks'])
+    elif int(inputs[0]) == 7:
+        departamento = input("Departamento : ")
+        result = transportar(catalog,departamento)
+
         
         
 

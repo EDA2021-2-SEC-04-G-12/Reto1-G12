@@ -362,6 +362,96 @@ def comp_tamanio (elemento1,elemento2):
     t1 = lt.size(elemento1['ArtWorks'])
     t2 = lt.size(elemento2['ArtWorks'])
     return t1 < t2
+
+#Funciones requerimiento 5. 
+def clasificarporDepto (catalog,departamento) : 
+    """
+    Clasifica los artWorks por el departamento especificado. 
+    """
+    i = 1 
+    artworks = lt.newList("ARRAY_LIST")
+    while i <= lt.size(catalog['artWork']) : 
+        artwork = lt.getElement(catalog['artWork'],i)
+        if artwork['Department'] == departamento :
+            lt.addLast(artworks,artwork)
+    return artworks
+
+
+
+def calcularCosto(artworks) : 
+    i = 1 
+    suma_costo = 0 
+    peso_estimado = 0 
+    while i <= lt.size(artworks) : 
+        estimaciones = 0 
+        artwork = lt.getElement(artworks['artWork'],i)
+        peso = artwork['Weight']
+        profundidad = artwork['Depth']
+        alto = artwork['Height']
+        ancho = artwork['Width']
+        mas_costoso = 0 
+        pesoKg = 0  
+        costo_defecto = 48 
+        costoArea = 0 
+        costoVolumen = 0 
+        costoKg = 0 
+
+        if len(ancho) > 0 and len(alto) > 0 :
+            anchoM = float(ancho)/100
+            altoM = float(alto)/100
+            Area = anchoM*altoM
+            costoArea = 72*Area
+            estimaciones += 1
+            if len(profundidad) > 0 : 
+                profundidadM = float(profundidad)/100
+                Volumen = Area*profundidadM 
+                costoVolumen = Volumen*72 
+                estimaciones += 1
+        if len(peso) > 0 : 
+            pesoKg = float(peso) 
+            costoKg = pesoKg*72
+            estimaciones += 1 
+        else :  
+            costo_defecto = 48 
+            mas_costoso = costo_defecto
+        if estimaciones > 1 : 
+            lista_costos = [costoKg,costoArea,costoVolumen]
+            lista_ordenada = sorted(lista_costos,reverse=True)
+            mas_costoso =  lista_ordenada[0]
+
+        costoEstimado = mas_costoso + costoKg + costoArea + costoVolumen 
+        suma_costo += costoEstimado
+        artwork['Costo estimado'] = costoEstimado
+        peso_estimado += pesoKg
+        i += 1 
+        return suma_costo, peso_estimado 
+    
+    def compareArtworkbyCost(artwork1,artwork2) : 
+        costo1 = float(artwork1['Costo estimado']) 
+        costo2 = float(artwork2['Costo estimado'])
+        return costo1 < costo2
+    
+    def sortArtworksbyCost(artworks,orden) : 
+        if orden == 1:
+            ins.sort(artworks, compareArtworkbyCost)
+        elif orden == 2:
+            sa.sort(artworks, compareArtworkbyCost)
+        elif orden == 3:
+            mer.sort(artworks, compareArtworkbyCost)
+        elif orden == 4:
+            quic.sort(artworks, compareArtworkbyCost)
+
+        
+
+
+            
+
+
+            
+
+             
+        
+
         
          
     

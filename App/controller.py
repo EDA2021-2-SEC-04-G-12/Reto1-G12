@@ -88,3 +88,8 @@ def rankbyCountry(catalog) :
 
 def countArtworks(artwork, catalog):
     return model.countArtworks(artwork, catalog)
+
+def transportar(catalog,departamento) : 
+    artWorks = model.clasificarporDepto (catalog,departamento)
+    results = model.calcularCosto(artWorks) 
+    costSortedartWorks = model.sortArtworksbyCost(artWorks,1)
