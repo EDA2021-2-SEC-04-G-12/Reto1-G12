@@ -86,6 +86,8 @@ def printArtistData(catalog, artists):
             print(lista_obras_tecnica["Title"] + lista_obras_tecnica["Date"] + lista_obras_tecnica["Medium"] + lista_obras_tecnica["Dimensions"])
         else:
             print("No tiene obras")
+    else:
+        print("No se encontró artista")
     
 def printArtWork(artWork): 
     print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
