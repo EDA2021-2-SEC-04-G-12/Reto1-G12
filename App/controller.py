@@ -84,6 +84,8 @@ def getArtworksArtist(artist_name, catalog):
 
 def rankbyCountry(catalog) : 
     rank = model.rankArtbyCountry(catalog)
+    sorted_rank = model.sortRank(rank)
+    return sorted_rank
 
 def countArtworks(artwork, catalog):
     return model.countArtworks(artwork, catalog)

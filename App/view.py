@@ -51,7 +51,7 @@ def loadData(catalog) :
 def listArtworkbyDate (fecha_inicial, fecha_final,catalog) : 
     return controller.listArtworkbyDate(fecha_inicial, fecha_final,catalog)
 def rankbyCountry(catalog) : 
-    controller.rankbyCountry(catalog)
+    return controller.rankbyCountry(catalog)
 
 #Funciones de print 
 
@@ -79,6 +79,8 @@ def printArtistData(artist, catalog):
 def printArtWork(artWork): 
     print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
 
+def printRank(sort_rank) : 
+    print('Nationality: ' + sort_rank['Nationality'] + '\t|\t' + 'ArtWorks: ' + str(lt.size(sort_rank['ArtWorks'])) + '\t|\t')
 
 
 catalog = None
@@ -147,6 +149,17 @@ while True:
     elif int(inputs[0]) == 5:
         print('Clasificando obras...') 
         result = rankbyCountry(catalog) 
+        primero = lt.getElement(result,lt.size(result))
+        tamanio_primero = lt.size(primero['ArtWorks'])
+        print('Ranking')
+        for i in range(lt.size(result),lt.size(result)-10,-1) : 
+            printRank(lt.getElement(result,i))
+        print("-"*50 +'\n')
+        j = 0 
+        print(primero['ArtWorks'])
+        
+        
+
         
 
     else:

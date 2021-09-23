@@ -128,7 +128,7 @@ def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan):
 # Funciones requerimiento 1
 
 def compareartists(artist1, artista):
-    if (artist1.lower() in artista['DisplayName'].lower()):
+    if (artist1['DisplayName'].lower() in artista['DisplayName'].lower()):
         return 0
     return -1
 
@@ -311,29 +311,49 @@ def rankArtbyCountry(catalog) :
     La funcion clasifica las obras por la nacionalidad de sus creadores 
 
     """
-    ranking = {'Sin procedencia' : ''}
-    ranking['Sin procedencia'] = lt.newList('ARRAY_LIST')
+    ranking = {'NA' : lt.newList('ARRAY_LIST')}
     tamanio_artWork = lt.size(catalog['artWork'])
     sortArtists(catalog,2)
     i = 1 
     while i < tamanio_artWork :
         artWork = lt.getElement(catalog['artWork'],i)
+        artWork['ArtistsNames'] = ""
         lista_ID = artWork['ConstituentID'].strip("[]").split(",") 
         for id in lista_ID :  
             ID = int(id)   
             pos_artist = searchArtist(catalog,ID)
             artistInfo = lt.getElement(catalog['artista'],pos_artist)
+            artWork['ArtistsNames'] += artistInfo['DisplayName'] + ','
             procedencia = artistInfo['Nationality']
             if procedencia not in ranking.keys() and len(procedencia) > 0 : 
                 ranking[procedencia] = lt.newList('ARRAY_LIST') 
-                lt.addLast(ranking[procedencia],artistInfo)
+                lt.addLast(ranking[procedencia],artWork)
             elif procedencia in ranking.keys() and len(procedencia) > 0: 
-                lt.addLast(ranking[procedencia],artistInfo)
+                lt.addLast(ranking[procedencia],artWork)
             else : 
-                lt.addLast(ranking['Sin procedencia'],artistInfo)
+                lt.addLast(ranking['NA'],artWork)
         i+=1 
-    
     return ranking 
+
+def sortRank (rank) : 
+    """
+    La funcion ordena la clasificacion de artWork por paises
+    """
+    lista = lt.newList('ARRAY_LIST')
+    for k,v in rank.items() : 
+        lt.addLast(lista,{"Nationality":k,"ArtWorks":v})
+    lista_sort = ins.sort(lista,comp_tamanio)
+    return lista_sort 
+
+def comp_tamanio (elemento1,elemento2):
+    t1 = lt.size(elemento1['ArtWorks'])
+    t2 = lt.size(elemento2['ArtWorks'])
+    return t1 < t2
+        
+         
+    
+    
+
 
             
         
