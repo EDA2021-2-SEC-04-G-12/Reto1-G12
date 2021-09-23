@@ -246,27 +246,27 @@ def getArtworksArtist(artist, catalog):
                 lt.addLast(artworkartist, artwork)
             i += 1
         sorted_list = quic.sort(artworkartist, cmpArtworks)
-        j = 2
+        j = 1
         count = 0
         mayor = 0
         count1 = 0
         name = ""
         while j <= lt.size(sorted_list):
-            if lt.getElement(sorted_list, j)["Medium"] != lt.getElement(sorted_list, j-1)["Medium"]:
+            if lt.getElement(sorted_list, j)["Medium"] != lt.getElement(sorted_list, j+1)["Medium"]:
                 name = lt.getElement(sorted_list, j)["Medium"]
                 count += 1
                 if count1 > mayor:
                     mayor = count1
-                    name = lt.getElement(sorted_list, j-1)["Medium"]
+                    name = lt.getElement(sorted_list, j+1)["Medium"]
                 count1 = 0
             else:
                 count1 += 1
             j += 1
-        k = 2
+        k = 1
         lista_obras_tecnica = lt.newList()
         while k <= lt.size(sorted_list):
             obra = lt.getElement(sorted_list, k)
-            if lt.getElement(sorted_list, k)["Medium"] == lt.getElement(sorted_list, k-1)["Medium"]:
+            if lt.getElement(sorted_list, k)["Medium"] == lt.getElement(sorted_list, k+1)["Medium"]:
                 lt.addLast(lista_obras_tecnica, obra)
         total_obras = lt.size(sorted_list)
         total_tecnicas = count
