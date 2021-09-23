@@ -38,11 +38,11 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Listar cronológicamente los artistas")
-    print("3- Ordenar cronológicamente las adquisiciones")
+    print("3- Listar cronológicamente las adquisiciones")
     print("4- Clasificar las obras por técnicas del artista")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
     print("6- Transportar obras de un departamento")
-    print("7- Proponer una nueva exposición en el museo")
+    print("7- Función de ordenamiento laboratorio 3")
 
 def initCatalog(listType): 
     return controller.initCatalog(listType)
@@ -102,8 +102,6 @@ while True:
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
         print('Artistas cargados: ' + str(lt.size(catalog['artista'])))\
 
-
-
     elif int(inputs[0]) == 2:
         anioinicial = int(input("Ingrese el año inicial: "))
         aniofinal = int(input("Ingrese el año final: "))
@@ -123,24 +121,8 @@ while True:
             artista = lt.getElement(artistas[0],i)
             print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n')
-            
 
-    elif int(inputs[0]) == 3:
-        size = int(input("Indique tamaño de la muestra: "))
-        orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
-        result = controller.sortArtists(catalog, int(size),int(orden))
-        print("Para la muestra de", size, " elementos en el requerimiento 2, el tiempo (mseg) es: ",
-                                          str(result[0]))
-        printSortResults(result[1])
-
-    elif int(inputs[0]) == 4:
-        artistname = input("Nombre del artista a buscar: ")
-        artists = controller.getArtworksArtist(artistname, catalog)
-        print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[5]))
-        print(artists)
-        printArtistData(catalog, artists)
-
-    elif int(inputs[0]) == 5: 
+    elif int(inputs[0]) == 3: 
         fecha_inicial = input("Fecha inicial(AAAA-MM-DD): ")
         fecha_final = input("Fecha final(A1AAA-MM-DD): ")
         result = listArtworkbyDate(fecha_inicial,fecha_final,catalog)
@@ -155,11 +137,26 @@ while True:
             artwork = lt.getElement(result[0],i) 
             printArtWork(artwork)
     
+    elif int(inputs[0]) == 4:
+        artistname = input("Nombre del artista a buscar: ")
+        artists = controller.getArtworksArtist(artistname, catalog)
+        print("Para el requerimiento 3, el tiempo (mseg) es: " + str(artists[5]))
+        print(artists)
+        printArtistData(catalog, artists)
 
-    elif int(inputs[0]) == 6:
+    elif int(inputs[0]) == 5:
         print('Clasificando obras...') 
         result = rankbyCountry(catalog) 
-        
+
+
+    elif int(inputs[0]) == 7:
+        size = int(input("Indique tamaño de la muestra: "))
+        orden = int(input("Indique un número para seleccionar un ordenamiento específico: (1) Insertion Sort  (2) Shell Sort  (3) Merge Sort  (4) Quick Sort\n"))
+        result = controller.sortArtists(catalog, int(size),int(orden))
+        print("Para la muestra de", size, " elementos en el requerimiento 2, el tiempo (mseg) es: ",
+                                          str(result[0]))
+        printSortResults(result[1])
+
 
     else:
         sys.exit(0)
