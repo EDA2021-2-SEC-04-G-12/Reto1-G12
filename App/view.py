@@ -90,6 +90,9 @@ def printArtistData(catalog, artists):
     else:
         print('No se encontro el artista')
     
+def printArtWork(artWork): 
+    print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
+
 
 
 catalog = None
