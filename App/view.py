@@ -131,7 +131,7 @@ while True:
     
     elif int(inputs[0]) == 3: 
         fecha_inicial = input("Fecha inicial(AAAA-MM-DD): ")
-        fecha_final = input("Fecha final(A1AAA-MM-DD): ")
+        fecha_final = input("Fecha final(AAAA-MM-DD): ")
         result = listArtworkbyDate(fecha_inicial,fecha_final,catalog)
         print("El numero total de obras en el rango especificado es: " + str(lt.size(result[0]))) 
         print("El numero de obras adquiridas por compra es: " + str(result[1]))
