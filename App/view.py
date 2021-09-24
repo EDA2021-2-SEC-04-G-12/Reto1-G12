@@ -123,7 +123,7 @@ while True:
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n') 
         print("-"*50+"\n")
         print("\nUltimos 3: \n")
-        for i in range(tamanio-3,tamanio+1) : 
+        for i in range(tamanio-4,tamanio+1) : 
             artista = lt.getElement(artistas[0],i)
             print( "ConstituentID: " +artista['ConstituentID'] + "\t|\t" + "DisplayName: " + artista['DisplayName'] + "\t|\t" + "BeginDate: " + artista['BeginDate'] + "\t|\t" + "ArtistBio: " + artista['ArtistBio'] + "\t|\t"\
             + "Wiki QID: " + artista['Wiki QID'] + "\t|\t" + "ULAN: " +  artista['ULAN'] +'\n')
@@ -135,7 +135,7 @@ while True:
         print("El numero total de obras en el rango especificado es: " + str(lt.size(result[0]))) 
         print("El numero de obras adquiridas por compra es: " + str(result[1]))
         print('Las ultimas 3 obras en el rango son: \n')
-        for i in range(lt.size(result[0])-3,lt.size(result[0])): 
+        for i in range(lt.size(result[0])-4,lt.size(result[0])): 
             artwork = lt.getElement(result[0],i) 
             printArtWork(artwork) 
         print("\n" +"Las primeras 3 obras son: \n")
