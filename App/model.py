@@ -128,7 +128,7 @@ def newArtist_2(DisplayName,id,bio,nationality,gender,begin,end,wiki,ulan):
 # Funciones requerimiento 1
 
 def compareartists(artist1, artista):
-    if (artist1['DisplayName'].lower() in artista['DisplayName'].lower()):
+    if (artist1.lower() in artista['DisplayName'].lower()):
         return 0
     return -1
 
