@@ -136,7 +136,7 @@ while True:
         print("El numero total de obras en el rango especificado es: " + str(lt.size(result[0]))) 
         print("El numero de obras adquiridas por compra es: " + str(result[1]))
         print('Las ultimas 3 obras en el rango son: \n')
-        for i in range(lt.size(result[0])-2,lt.size(result[0])): 
+        for i in range(lt.size(result[0])-3,lt.size(result[0])): 
             artwork = lt.getElement(result[0],i) 
             printArtWork(artwork) 
         print("\n" +"Las primeras 3 obras son: \n")
