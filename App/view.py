@@ -106,7 +106,7 @@ while True:
         catalog = initCatalog(listType) 
         loadData(catalog)
         print('Obras cargadas:  ' + str(lt.size(catalog['artWork'])))
-        print('Artistas cargados: ' + str(lt.size(catalog['artista'])))\
+        print('Artistas cargados: ' + str(lt.size(catalog['artista'])))
 
     elif int(inputs[0]) == 2:
         anioinicial = int(input("Ingrese el año inicial: "))
