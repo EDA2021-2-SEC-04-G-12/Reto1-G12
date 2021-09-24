@@ -231,10 +231,13 @@ def cmpArtworks(artwork1, artwork2):
 
 def getArtworksArtist(artist, catalog):
     posartist = lt.isPresent(catalog['artista'], artist)
+    start_time = time.process_time()
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
     if posartist > 0:
         artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
-        idartist = int(artist["ConstituentID"])
+        idartist = artist["ConstituentID"]
         i = 1
         while i <= lt.size(catalog["artWork"]):
             artwork = lt.getElement(catalog["artWork"], i)
@@ -249,6 +252,7 @@ def getArtworksArtist(artist, catalog):
         name = ""
         while j <= lt.size(sorted_list):
             if lt.getElement(sorted_list, j)["Medium"] != lt.getElement(sorted_list, j-1)["Medium"]:
+                name = lt.getElement(sorted_list, j)["Medium"]
                 count += 1
                 if count1 > mayor:
                     mayor = count1
@@ -257,8 +261,16 @@ def getArtworksArtist(artist, catalog):
             else:
                 count1 += 1
             j += 1
-
-        return artist
+        k = 2
+        lista_obras_tecnica = lt.newList()
+        while k <= lt.size(sorted_list):
+            obra = lt.getElement(sorted_list, k)
+            if lt.getElement(sorted_list, k)["Medium"] == lt.getElement(sorted_list, k-1)["Medium"]:
+                lt.addLast(lista_obras_tecnica, obra)
+        total_obras = lt.size(sorted_list)
+        total_tecnicas = count
+        tecnica_mas_utilizada = name
+        return artist, total_obras, total_tecnicas, tecnica_mas_utilizada, lista_obras_tecnica, elapsed_time_mseg
     return None
 
 #Funciones requerimiento 4
