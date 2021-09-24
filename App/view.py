@@ -89,6 +89,9 @@ def printArtistData(catalog, artists):
 def printArtWork(artWork): 
     print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
 
+def printArtWork_2(artWork) : 
+    print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistsNames: " + artWork['ArtistsNames'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
+
 def printRank(sort_rank) : 
     print('Nationality: ' + sort_rank['Nationality'] + '\t|\t' + 'ArtWorks: ' + str(lt.size(sort_rank['ArtWorks'])) + '\t|\t')
 
@@ -160,8 +163,22 @@ while True:
         for i in range(lt.size(result),lt.size(result)-10,-1) : 
             printRank(lt.getElement(result,i))
         print("-"*50 +'\n')
+        print("La nacionalidad mas popular fue: " + primero['Nationality'] + "y sus primeras y ultimas 3 obras fueron: ")
+        k = 1 
+        while k <= 4 : 
+            artWork = lt.getElement(primero['ArtWorks'],k)
+            printArtWork_2(artWork)
+            k += 1 
+        j = tamanio_primero
+        print('\n'+'-'*50 +'\n')
+        while j >= tamanio_primero - 3 : 
+            artWork = lt.getElement(primero['ArtWorks'],j)
+            printArtWork_2(artWork)
+            j -= 1 
+        
+        
 
-        j = 0 
+
     elif int(inputs[0]) == 6:
         departamento = input("Departamento : ")
         result = transportar(catalog,departamento)        
