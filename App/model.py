@@ -234,6 +234,7 @@ def getArtworksArtist(artist, catalog):
     start_time = time.process_time()
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
+    print(posartist)
     if posartist > 0:
         artworkartist = lt.newList()
         artist = lt.getElement(catalog['artista'], posartist)
@@ -244,6 +245,7 @@ def getArtworksArtist(artist, catalog):
             if idartist in artwork["ConstituentID"]:
                 lt.addLast(artworkartist, artwork)
             i += 1
+        print(lt.size(artworkartist), "artist")
         sorted_list = quic.sort(artworkartist, cmpArtworks)
         j = 2
         count = 0
@@ -261,18 +263,22 @@ def getArtworksArtist(artist, catalog):
             else:
                 count1 += 1
             j += 1
+        print(count1, "count")
         k = 2
         lista_obras_tecnica = lt.newList()
         while k <= lt.size(sorted_list):
             obra = lt.getElement(sorted_list, k)
             if lt.getElement(sorted_list, k)["Medium"] == lt.getElement(sorted_list, k-1)["Medium"]:
                 lt.addLast(lista_obras_tecnica, obra)
+            k+=1
+
+        print(lt.size(lista_obras_tecnica), "lista")
         total_obras = lt.size(sorted_list)
         total_tecnicas = count
         tecnica_mas_utilizada = name
         return artist, total_obras, total_tecnicas, tecnica_mas_utilizada, lista_obras_tecnica, elapsed_time_mseg
     return None
-
+ 
 #Funciones requerimiento 4
 def sortArtists(catalog,orden) : 
     """
