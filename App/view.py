@@ -87,7 +87,7 @@ def printArtistData(catalog, artists):
         print('No se encontro el artista')
     
 def printArtWork(artWork): 
-    print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
+    print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + 'DateAc ' + artWork['DateAcquired'] + '\t|\t' +  "ArtistID: " + artWork['ConstituentID'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])
 
 def printArtWork_2(artWork) : 
     print("ObjectID: " + artWork['ObjectID'] + '\t|\t' + "ArtistsNames: " + artWork['ArtistsNames'] + '\t|\t' + "Date: " + artWork['Date'] + "\t|\t" + artWork['Medium'] + "\t|\t" + artWork['Dimensions'])

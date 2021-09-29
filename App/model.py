@@ -186,7 +186,7 @@ def sortDateQuick(catalog):
 
 def listArtworkbyDate(fechainicial,fechafinal,catalog):
     size= lt.size(catalog['artWork'])
-    sortArtwork(catalog,2)
+    sortArtwork(catalog,3)
     datosart = lt.newList("ARRAY_LIST")
     stop = False
     i = 1
