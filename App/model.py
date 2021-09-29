@@ -133,10 +133,10 @@ def compareartists(artist1, artista):
     return -1
 
 def compareratings(artist1, artist2):
-    return (float(artist1['BeginDate']) > float(artist2['BeginDate']))
+    return (float(artist1['BeginDate']) < float(artist2['BeginDate']))
 
 def sortArtist(catalog):
-    sa.sort(catalog['artist'])
+    sa.sort(catalog['artista'],compareratings)
 
 def listCronoArtist(anioinicial,aniofinal,catalog):
     datosartist = lt.newList("ARRAY_LIST")
@@ -145,9 +145,10 @@ def listCronoArtist(anioinicial,aniofinal,catalog):
     start_time = time.process_time()
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
+    sortArtist(catalog)
     while i <= lt.size(catalog["artista"]) and not stop:
-        artist = lt.getElement(catalog["artista"],i)
-        if anioinicial >= int(artist["BeginDate"]) and int(artist["BeginDate"]) <= aniofinal:
+        artist = lt.getElement(catalog['artista'],i)
+        if anioinicial <= int(artist["BeginDate"]) and aniofinal >= int(artist["BeginDate"]) <= aniofinal:
             lt.addLast(datosartist,artist)
         elif int(artist["BeginDate"]) > aniofinal:
             stop = True
